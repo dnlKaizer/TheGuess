@@ -5,7 +5,7 @@
 
 @font-face { /* Cria uma nova fonte */
     font-family: LTSaeada;
-    src: url(../fonts/LTSaeada-Bold.otf); /*  */
+    src: url(../fonts/LTSaeada-Bold.otf); /* Caminho de fontes (1º ponto significa a pasta atual, 2º significa pasta anterior */
 }
 
 body { /* Muda tudo no corpo da página */
@@ -20,7 +20,7 @@ h3 {
     font-family: LTSaeada;
     font-size: 30px;
     max-width: 320px;
-    padding-inline: 0;
+    padding-inline: 0; /* Remove padding nas laterais */
 }
 
 .logo { /* Características da imagem logo */
@@ -42,7 +42,6 @@ h3 {
     border-bottom: 5px solid bisque; /* Adiciona sombra no botão */
     transition: transform 0.5s; /* Tempo que o botão leva para voltar para a posição original */
     max-width: 250px;
-    align-self: center;
 }
 
 .botao:hover { /* Altera o botão quando passa o cursor */
