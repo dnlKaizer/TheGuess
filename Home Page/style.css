@@ -41,6 +41,8 @@ h3 {
     border-radius: 10px; /* Raio da borda do botão */
     border-bottom: 5px solid bisque; /* Adiciona sombra no botão */
     transition: transform 0.5s; /* Tempo que o botão leva para voltar para a posição original */
+    max-width: 250px;
+    align-self: center;
 }
 
 .botao:hover { /* Altera o botão quando passa o cursor */
