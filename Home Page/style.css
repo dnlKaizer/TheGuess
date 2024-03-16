@@ -1,17 +1,26 @@
 * { /* Muda tudo na página */
     margin: 0; /* Remove todas as margens */
-    padding: 0; /* Adiciona a distância do conteúdo de um elemento de sua borda */
+    padding: 0; /* Remove a distância do conteúdo de um elemento de sua borda */
+}
+
+@font-face { /* Cria uma nova fonte */
+    font-family: LTSaeada;
+    src: url(../fonts/LTSaeada-Bold.otf); /*  */
 }
 
 body { /* Muda tudo no corpo da página */
     background-color: white; /* Muda a cor do background */
     font-family: sans-serif; /* Muda a fonte */
-    padding: 60px; 
+    padding: 50px; 
     text-align: center; /* Alinha no centro da página */
 }
 
-h1 {
+h3 {
     padding: 40px;
+    font-family: LTSaeada;
+    font-size: 30px;
+    max-width: 320px;
+    padding-inline: 0;
 }
 
 .logo { /* Características da imagem logo */
@@ -20,13 +29,14 @@ h1 {
 }
 
 .botao { /* Características Gerais do Botão */
+    font-family: LTSaeada;
     color: black; /* Cor do texto do botão */
-    
-    font-size: 18px; /* Tamanho da fonte */
+    max-width: 250px;
+    font-size: 22px; /* Tamanho da fonte */
     text-decoration: none; /* Remove o sublinhado */
     display: block; /* Coloca um botão abaixo do outro */
     margin-bottom: 20px; /* Distancia a margem entre os botões, para que a cor deles não junte */
-    padding: 10px;
+    padding: 16px;
     background-color: beige;
     border-radius: 10px; /* Raio da borda do botão */
     border-bottom: 5px solid bisque; /* Adiciona sombra no botão */
