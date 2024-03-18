@@ -11,16 +11,23 @@
 body { /* Muda tudo no corpo da página */
     background-color: white; /* Muda a cor do background */
     font-family: sans-serif; /* Muda a fonte */
-    padding: 50px; 
+    padding-top: 50px; 
     text-align: center; /* Alinha no centro da página */
 }
 
-h3 {
-    padding: 40px;
+h2 {
+    padding-block: 40px;
     font-family: LTSaeada;
     font-size: 30px;
     max-width: 320px;
-    padding-inline: 0; /* Remove padding nas laterais */
+}
+
+h4 {
+    padding-block: 10px;
+    text-align: left;
+    font-family: sans-serif;
+    font-size: 12px;
+    max-width: 275px;
 }
 
 .logo { /* Características da imagem logo */
@@ -49,4 +56,22 @@ h3 {
     box-shadow: 0px 0px 10px antiquewhite; /* Adiciona brilho no botão */
     transform: translate(0px, -2px); /* Desloca o botão (horizontal, vertical) */
     transition: transform 0.5s; /* Tempo que o botão leva para ser deslocado */
+}
+
+.register {
+    text-align: left;
+    max-width: 300px;
+}
+
+.identidade {
+    display: block;
+    margin-bottom: 20px;
+    padding: 6px;
+    font-size: 18px;
+    width: 300px;
+    height: 30px;
+}
+
+#botao-login {
+    margin-block: 50px;
 }
