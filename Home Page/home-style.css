@@ -24,16 +24,25 @@ header {
     left: 0;
     width: 100%;
     padding: 20px 100px;
-    background: red;
+    background: antiquewhite;
     display: flex;
     justify-content: space-between;
     align-items: center;
     z-index: 99;
 }
 
+main {
+    background-color: black; 
+    padding-top: 5%; 
+    text-align: center;
+    width: 60%;
+    height: 400px;
+    top: 5%;
+}
+
 .titulo {
     font-size: 2em;
-    color: #fff;
+    color: black;
     user-select: none;
 }
 
@@ -41,7 +50,7 @@ header {
     width: 35px;
     height: 35px;
     background: transparent;
-    border: 2px solid #fff;
+    border: 2px solid black;
     outline: none;
     border-radius: 6px;
     cursor: pointer;
@@ -49,6 +58,14 @@ header {
 }
 
 .botao-regras:hover {
-    background-color: antiquewhite; 
-    box-shadow: 0px 0px 10px antiquewhite;
+    background-color: white; 
+    box-shadow: 0px 0px 10px white;
+}
+
+.main .caixa-texto{
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    width: 100px;
+    height: 400px;
 }
