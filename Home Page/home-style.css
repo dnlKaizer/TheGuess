@@ -31,14 +31,15 @@ header {
     z-index: 99;
 }
 
-main {
-    background-color: rgb(221, 206, 166); 
-    padding-top: 5%; 
-    text-align: center;
-    width: 60%;
-    height: 400px;
-    top: 5%;
-}
+.corpo-principal {
+    position: relative;
+    width: 400px;
+    height: 440px;
+    background-color: rgb(221, 206, 166);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
 
 .titulo {
     font-size: 2em;
