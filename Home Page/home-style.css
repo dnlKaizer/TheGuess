@@ -60,7 +60,6 @@ nav.navegacao {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 1%;
 }
     
 .linha {
@@ -72,6 +71,7 @@ nav.navegacao {
 }
 
 .caixas-texto {
+    margin-top: 30%;
     width: 260px;
     height: 300px;
     display: flex;
@@ -112,4 +112,9 @@ nav.navegacao {
     border-radius: 0px;
     border: 20px solid #000000;
     background-color: transparent;
+}
+
+.teste {
+    font-size: 35px;
+    text-align: center;
 }
