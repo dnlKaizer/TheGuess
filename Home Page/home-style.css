@@ -125,4 +125,7 @@ nav.navegacao {
     font-size: 35px;
     text-align: center;
     font-family: LTSRegular;
+    text-transform: uppercase;
+    width: 52px;
+    height: 52px;
 }
