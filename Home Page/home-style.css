@@ -5,8 +5,13 @@
 }
 
 @font-face { 
-    font-family: LTSaeada;
+    font-family: LTSBold;
     src: url(../fonts/LTSaeada-Bold.otf); 
+}
+
+@font-face { 
+    font-family: LTSRegular;
+    src: url(../fonts/LTSaeada-Regular.otf); 
 }
 
 body {
@@ -16,7 +21,7 @@ body {
     background-color: white;
     padding-top: 5%; 
     text-align: center;
-    font-family: LTSaeada;
+    font-family: LTSBold;
 }
 
 header {
@@ -100,7 +105,7 @@ nav.navegacao {
     border-radius: 6px;
     cursor: pointer;
     font-size: 1rem;
-    font-family: LTSaeada;
+    font-family: LTSBold;
 }
 
 .botao-regras:hover {
@@ -116,7 +121,8 @@ nav.navegacao {
     background-color: transparent;
 }
 
-.teste {
+.caixa-input {
     font-size: 35px;
     text-align: center;
+    font-family: LTSRegular;
 }
