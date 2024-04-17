@@ -2,3 +2,16 @@
     padding: 0;
     margin: 0;
 }
+
+@font-face { /* Cria uma nova fonte */
+    font-family: LTS;
+    src: url(../fonts/LTSaeada-Bold.otf); /* Caminho de fontes (1º ponto significa a pasta atual, 2º significa pasta anterior */
+}
+
+body {
+    font-family: LTS;
+}
+
+.botao {
+    display: block;
+}
