@@ -5,17 +5,77 @@
 
 @font-face { /* Cria uma nova fonte */
     font-family: LTS;
-    src: url(../fonts/LTSaeada-Bold.otf); /* Caminho de fontes (1º ponto significa a pasta atual, 2º significa pasta anterior */
+    src: url(./fonts/LTSaeada-Bold.otf); /* Caminho de fontes (1º ponto significa a pasta atual, 2º significa pasta anterior */
+}
+
+header {
+    background-color: rgb(1, 1, 17);
+    color: white;
+    padding-block: 2vh;
+    display: inline-flex;
+    width: 100%;
+    align-items: center;
+}
+header h1 {
+    text-align: left;
+    width: 100%;
+    margin-left: 20px;
 }
 
 body {
     font-family: LTS;
 }
 
+h2 {
+    font-size: 24pt;
+}
+
+nav #botoes-landing {
+    margin-top: 30px;
+}
+
 .botao {
+    font-family: LTS;
+    font-size: 16pt;
     display: block;
+    color: white;
+    background-color: rgb(1, 1, 17);
+    text-decoration: none;
+    width: 80%;
+    max-width: 240px;
+    margin-block: 10px;
+    padding-inline: 10px;
+    padding-block: 15px;
+    border-radius: 20px;
 }
 
 .letra {
     width: 20px;
+}
+
+#conteudo-landing {
+    box-sizing: border-box;
+    text-align: center;
+    align-items: center;
+    width: 100%;
+    padding-inline: 15%;
+    margin-block: 10px;
+
+}
+
+#logo {
+    max-width: 240px;
+    width: 80%;
+    margin-block: 20px;
+}
+
+#botao-sair {
+    font-size: 15pt;
+    background-color: white;
+    color: rgb(1, 1, 17);
+    text-decoration: none;
+    padding: 5px;
+    border-radius: 10px;
+    margin-right: 10px;
+    height: 22px;
 }
