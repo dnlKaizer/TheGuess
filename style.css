@@ -10,6 +10,7 @@
 
 header {
     background-color: rgb(1, 1, 17);
+    box-shadow: 1px 1px 3px #000;
     color: white;
     padding-block: 2vh;
     display: inline-flex;
@@ -34,6 +35,10 @@ nav #botoes-landing {
     margin-top: 30px;
 }
 
+ol {
+    margin-top: 30px;
+}
+
 .botao {
     font-family: LTS;
     font-size: 16pt;
@@ -47,6 +52,14 @@ nav #botoes-landing {
     padding-inline: 10px;
     padding-block: 15px;
     border-radius: 20px;
+    box-shadow: 1px 1px 3px #000;
+    transition: transform 0.8s; /* Tempo que o botão leva para voltar para a posição original */
+}
+.botao:hover {
+    background-color: rgb(3, 3, 31); 
+    box-shadow: 0px 0px 10px rgb(3, 3, 31); /* Adiciona brilho no botão */
+    transform: translate(0px, -2px); /* Desloca o botão (horizontal, vertical) */
+    transition: transform 0.8s; /* Tempo que o botão leva para ser deslocado */
 }
 
 .letra {
@@ -78,4 +91,9 @@ nav #botoes-landing {
     border-radius: 10px;
     margin-right: 10px;
     height: 22px;
+    width: 22px;
+    margin-block: 0;
+}
+#botao-sair:hover {
+    transform: translate(0px, -1px); /* Desloca o botão (horizontal, vertical) */
 }
