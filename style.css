@@ -12,6 +12,10 @@ body {
     font-family: LTS;
 }
 
+h1 {
+    text-align: center;
+}
+
 .botao {
     display: block;
 }
