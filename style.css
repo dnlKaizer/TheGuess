@@ -88,7 +88,14 @@ form .botao {
 }
 
 .letra {
-    width: 20px;
+    width: 33px;
+    height: 28px;
+    border: 2px solid black;
+    border-radius: 4px;
+}
+
+.linha {
+    margin: 10px 0;
 }
 
 #conteudo-landing {
