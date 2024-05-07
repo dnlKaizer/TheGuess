@@ -50,6 +50,7 @@ form .botao {
 .conteudo-form {
     width: 260px;
     padding-top: 50px;
+    margin: auto;
 }
 .conteudo-form nav {
     text-align: center;
@@ -81,6 +82,7 @@ form .botao {
     transition: transform 0.8s; /* Tempo que o botão leva para voltar para a posição original */
 }
 .botao:hover {
+    cursor: pointer;
     background-color: rgb(3, 3, 31); 
     box-shadow: 0px 0px 10px rgb(3, 3, 31); /* Adiciona brilho no botão */
     transform: translate(0px, -2px); /* Desloca o botão (horizontal, vertical) */
