@@ -1,4 +1,4 @@
-html, body, figure, img, div, section, article, input, form, label, header, footer, button, textarea, p, h1, h2, h3, h4, h5, h6, ol, ul, li, a {
+html, body, figure, img, div, section, article, input, form, label, header, footer, button, p, h1, h2, h3, ol, li, a {
     margin: 0;
     padding: 0;
     border: none;
@@ -7,9 +7,9 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
             box-sizing: border-box;
     list-style: none;
     text-decoration: none;
-  }
+}
 
 .container{
-width: 100%;
-margin: 0 auto;
+    width: 100%;
+    margin: 0 auto;
 }
