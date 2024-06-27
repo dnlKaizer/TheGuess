@@ -1,0 +1,15 @@
+html, body, figure, img, div, section, article, input, form, label, header, footer, button, textarea, p, h1, h2, h3, h4, h5, h6, ol, ul, li, a {
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+  }
+
+.container{
+width: 100%;
+margin: 0 auto;
+}
