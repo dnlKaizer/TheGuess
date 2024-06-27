@@ -15,9 +15,30 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
     src: url(./fonts/LTSaeada-Bold.otf); /* Caminho de fontes (1º ponto significa a pasta atual, 2º significa pasta anterior */
 }
 
+
 .container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     margin: 0 auto;
+}
+
+.container__header{
+    padding: 10px;
+}
+
+.container__landing{
+    margin-top: 70px;
+    padding: 30px 80px;
+}
+
+.main__links{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .button {
