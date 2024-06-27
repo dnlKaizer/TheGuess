@@ -15,6 +15,10 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
     src: url(./fonts/LTSaeada-Bold.otf); /* Caminho de fontes (1º ponto significa a pasta atual, 2º significa pasta anterior */
 }
 
+.header {
+    color: white;
+    background-color: rgb(3, 3, 31);
+}
 
 .container{
     display: flex;
