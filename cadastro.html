@@ -25,10 +25,14 @@
             <form class="form" action="./home.html">
                 <h2 class="form__title">Cadastro</h2>
                 <div class="input__container">
-                    <label class="label" for="email">Email</label>
-                    <input class="input" type="email" placeholder="user@gmail.com">
-                    <label class="label" for="password">Senha</label>
-                    <input class="input" type="password" placeholder="senha123">
+                    <div class="email">
+                        <label class="label" for="email">Email</label>
+                        <input class="input" type="email" placeholder="user@gmail.com" name="email">
+                    </div>
+                    <div class="password">
+                        <label class="label" for="senha">Senha</label>
+                        <input class="input" type="password" placeholder="senha123" name="senha">        
+                    </div>
                 </div>
                 <button class="button">Cadastrar</button>
             </form>
