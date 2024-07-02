@@ -51,6 +51,9 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
 }
 
 .container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     margin: 0 auto;
 }
@@ -60,6 +63,7 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
 }
 
 .container__landing, .container__home, .container__login{
+    flex-direction: column;
     margin-top: 70px;
     padding: 30px 80px;
 }
