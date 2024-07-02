@@ -97,6 +97,7 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
 }
 
 .letter {
+    text-transform: uppercase;
     text-align: center;
     color: rgb(1, 1, 17);
     font-size: 24pt;
