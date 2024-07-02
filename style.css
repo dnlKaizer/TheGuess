@@ -68,6 +68,13 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
     justify-content: center;
 }
 
+.input__container {
+    display: flex;
+    align-items: left;
+    justify-content: center;
+    flex-direction: column;
+}
+
 .button {
     text-align: center;
     display: block;
@@ -90,6 +97,28 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
     box-shadow: 0px 0px 10px rgb(3, 3, 31); 
     transform: translate(0px, -2px); 
     transition: transform 0.8s; 
+}
+
+.form__title {
+    font-size: 24pt;
+    margin-bottom: 20px;
+}
+
+.email, .password {
+    margin-bottom: 10px;
+}
+
+.label {
+    font-size: 15pt;
+}
+
+.input {
+    font-size: 12pt;
+    padding-block: 2px;
+    padding-inline: 5px;
+    border: 1px solid rgb(1, 1, 17);
+    border-radius: 15px;
+    margin-left: 10px;
 }
 
 .row {
