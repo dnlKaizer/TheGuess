@@ -29,6 +29,12 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
     border-radius: 20%;
     width: 32px;
     height: 32px;
+    transition: transform 0.8s; 
+}
+
+.header__button:hover {
+    transform: translate(0px, -2px); 
+    transition: transform 0.8s; 
 }
 
 .header__img {
