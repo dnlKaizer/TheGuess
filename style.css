@@ -20,6 +20,23 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
     background-color: rgb(3, 3, 31);
 }
 
+.header__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: white;
+    border-radius: 20%;
+    width: 32px;
+    height: 32px;
+}
+
+.header__img {
+    width: 32px;
+    height: 32px;
+    padding: 2px;
+}
+
 .container{
     display: flex;
     flex-direction: column;
