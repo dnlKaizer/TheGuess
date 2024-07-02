@@ -51,10 +51,6 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
 }
 
 .container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     width: 100%;
     margin: 0 auto;
 }
