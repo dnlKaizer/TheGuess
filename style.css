@@ -65,7 +65,7 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
 .container__landing, .container__home, .container__login{
     flex-direction: column;
     margin-top: 70px;
-    padding: 30px 80px;
+    padding: 30px;
 }
 
 .main__links{
