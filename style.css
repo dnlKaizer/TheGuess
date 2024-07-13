@@ -74,7 +74,11 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
 
 .container__landing, .container__home, .container__login{
     flex-direction: column;
-    padding: 30px;
+    padding: 50px;
+}
+
+.container__landing{
+    gap: 20px;
 }
 
 .main__links{
@@ -163,4 +167,24 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
 .letter:focus {
     border-bottom: 4px solid rgb(1, 1, 17);
     transform: translate(0px, -2px); 
+}
+
+.logo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.logo__img{
+    height: 230px;
+    width: 230px;
+}
+
+.logo__img .img{
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    object-position: center;
 }
