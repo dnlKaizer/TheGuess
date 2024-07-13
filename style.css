@@ -62,9 +62,19 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
     padding: 10px;
 }
 
+.container__landing, .container__home {
+    height: calc(100vh - 52px);
+    margin: auto;
+}
+
+.login {
+    height: calc(100vh - 68px);
+    margin: auto;
+}
+
 .container__landing, .container__home, .container__login{
     flex-direction: column;
-    padding: 50px 80px;
+    padding: 50px;
 }
 
 .container__landing{

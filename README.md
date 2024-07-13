@@ -1,4 +1,4 @@
-# Projeto PW
+# TheGuess
 Projeto de um jogo de adivinhar palavras em aplicativo Web
 
 Colaboradores:
