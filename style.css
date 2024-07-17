@@ -97,9 +97,7 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
 }
 
 .button {
-    margin-inline: auto;
     text-align: center;
-    display: block;
     color: white;
     background-color: rgb(1, 1, 17);
     box-shadow: 1px 1px 3px #000;
@@ -108,9 +106,7 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
     width: 240px;
     border-radius: 20px;
     font-size: 16pt;
-    margin-block: 10px;
-    padding-inline: 10px;
-    padding-block: 15px;
+    padding: 15px 10px
 }
 
 .button:hover {
@@ -187,4 +183,11 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
     width: 100%;
     object-fit: contain;
     object-position: center;
+}
+
+.links{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 0;
 }
