@@ -144,8 +144,10 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
     border-radius: 15px;
 }
 
-.row {
-    margin-bottom: 8px;
+.word__content{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 .letter {
