@@ -94,6 +94,7 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
     justify-content: center;
     flex-direction: column;
     margin-bottom: 20px;
+    width: 100%;
 }
 
 .button {
@@ -119,9 +120,14 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
 
 .form {
     width: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .form__title {
+    width: 100%;
     font-size: 24pt;
     margin-bottom: 30px;
 }
