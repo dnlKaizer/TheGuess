@@ -174,11 +174,13 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
     border-radius: 20%;
     width: 40px;
     height: 40px;
+    transition: transform 0.2s; 
 }
 
 .letter:focus {
     border-bottom: 4px solid rgb(1, 1, 17);
     transform: translate(0px, -2px); 
+    transition: transform 0.2s; 
 }
 
 .logo{
