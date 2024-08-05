@@ -156,6 +156,14 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
     gap: 8px;
 }
 
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    height: 42px;
+}
+
 .letter {
     text-transform: uppercase;
     text-align: center;
