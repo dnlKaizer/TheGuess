@@ -189,6 +189,7 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
     align-items: center;
     justify-content: center;
     gap: 10px;
+    text-align: center;
 }
 
 .logo__img{
