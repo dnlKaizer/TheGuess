@@ -106,7 +106,7 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
     
     width: 240px;
     border-radius: 20px;
-    font-size: 16pt;
+    font-size: 1.5rem;
     padding: 15px 10px
 }
 
@@ -128,7 +128,7 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
 
 .form__title {
     width: 100%;
-    font-size: 24pt;
+    font-size: 2rem;
     margin-bottom: 30px;
 }
 
@@ -137,13 +137,13 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
 }
 
 .label {
-    font-size: 18pt;
+    font-size: 1.5rem;
 }
 
 .input {
     width: 230px;
     float: right;
-    font-size: 12pt;
+    font-size: 1rem;
     padding-block: 4px;
     padding-inline: 8px;
     border: 1px solid rgb(1, 1, 17);
@@ -168,7 +168,7 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
     text-transform: uppercase;
     text-align: center;
     color: rgb(1, 1, 17);
-    font-size: 24pt;
+    font-size: 2rem;
 
     border: 2px solid rgb(3, 3, 31);
     border-radius: 20%;
