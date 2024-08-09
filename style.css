@@ -76,6 +76,11 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
     flex-direction: column;
     padding: 50px;
 }
+@media screen and (max-width: 768px) {
+    .container__home, .container__login{
+        justify-content: start;
+    }
+}
 
 .container__landing{
     gap: 20px;
@@ -195,6 +200,18 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
 .logo__img{
     height: 230px;
     width: 230px;
+}
+@media screen and (max-width: 768px) {
+    .logo__img{
+        height: 200px;
+        width: 200px;
+    }
+}
+@media screen and (max-width: 600px) {
+    .logo__img{
+        height: 180px;
+        width: 180px;
+    }
 }
 
 .logo__img .img{
