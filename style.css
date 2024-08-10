@@ -18,6 +18,7 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
 .header {
     color: white;
     background-color: rgb(3, 3, 31);
+    box-shadow: 0px 5px 5px #000021;
 }
 
 .nav {
