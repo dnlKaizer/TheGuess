@@ -205,7 +205,12 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
     transition: transform 0.2s; 
 }
 
-.letter:focus {
+.letter.letterOff {
+    background-color: rgba(1, 1, 17, 0.4);
+    border: none;
+}
+
+.letter.letterOn:focus {
     border-bottom: 4px solid rgb(1, 1, 17);
     transform: translate(0px, -2px); 
     transition: transform 0.2s; 
