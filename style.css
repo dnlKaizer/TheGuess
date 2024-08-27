@@ -159,7 +159,7 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
     margin-bottom: 30px;
 }
 
-.email, .password {
+.email, .password, .confirm__password {
     margin-bottom: 20px;
 }
 
