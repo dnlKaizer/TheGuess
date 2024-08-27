@@ -110,7 +110,8 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
     box-shadow: 1px 1px 3px #000;
     transition: transform 0.8s; 
     
-    width: 240px;
+    width: 80vw;
+    max-width: 240px;
     border-radius: 20px;
     font-size: 1.5rem;
     padding: 15px 10px
@@ -124,13 +125,33 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
     transition: transform 0.8s; 
 }
 
+.input, .form {
+    width: 80vw;
+    max-width: 320px;
+}
 .form {
-    width: 320px;
+    /* width: 320px; */
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 }
+/* @media only screen and (max-width: 600px) {
+    
+}
+@media only screen and (min-width: 600px) {
+
+}
+@media only screen and (min-width: 768px) {
+
+}
+@media only screen and (min-width: 992px) {
+
+}
+@media only screen and (min-width: 1200px) {
+
+} */
+
 
 .form__title {
     width: 100%;
@@ -147,13 +168,14 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
 }
 
 .input {
-    width: 230px;
+    /* width: 320px; */
     float: right;
     font-size: 1rem;
     padding-block: 4px;
     padding-inline: 8px;
     border: 1px solid rgb(1, 1, 17);
     border-radius: 15px;
+    margin-top: 5px;
 }
 
 .word__content{
