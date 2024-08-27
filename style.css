@@ -131,6 +131,22 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
     justify-content: center;
     flex-direction: column;
 }
+/* @media only screen and (max-width: 600px) {
+    
+}
+@media only screen and (min-width: 600px) {
+
+}
+@media only screen and (min-width: 768px) {
+
+}
+@media only screen and (min-width: 992px) {
+
+}
+@media only screen and (min-width: 1200px) {
+
+} */
+
 
 .form__title {
     width: 100%;
@@ -147,13 +163,14 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
 }
 
 .input {
-    width: 230px;
+    width: 320px;
     float: right;
     font-size: 1rem;
     padding-block: 4px;
     padding-inline: 8px;
     border: 1px solid rgb(1, 1, 17);
     border-radius: 15px;
+    margin-top: 5px;
 }
 
 .word__content{
