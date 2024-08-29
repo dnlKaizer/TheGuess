@@ -20,3 +20,14 @@ let setWordStatusOn = (index) => {
         inputElement.disabled = false;
     });
 }
+
+/**
+ * @param {number} index 
+ */
+let setWordStatusOff = (index) => {
+    let word = getWord(index);
+    word.forEach((inputElement, i) => {
+        inputElement.classList = "letter letterOff l" + i;
+        inputElement.disabled = true;
+    });
+}
