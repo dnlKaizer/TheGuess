@@ -11,7 +11,7 @@ let currentCol = 0;
 const getWord = (rowIndex) => {
     let word = []
     for (let i = 0; i < 5; i++) {
-        word[i] = document.querySelector("#row" + rowIndex + " .l" + (i + 1));
+        word[i] = document.querySelector("#row" + rowIndex + " .l" + i);
     }
     return word;
 }
@@ -22,7 +22,7 @@ const getWord = (rowIndex) => {
  * @returns {HTMLInputElement}
  */
 const getLetter = (rowIndex, colIndex) => {
-    return document.querySelector("row" + rowIndex + " .l" + colIndex);
+    return document.querySelector("#row" + rowIndex + " .l" + colIndex);
 }
 
 /**
