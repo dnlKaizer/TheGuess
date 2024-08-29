@@ -18,6 +18,15 @@ const getWord = (rowIndex) => {
 
 /**
  * @param {number} rowIndex 
+ * @param {number} colIndex 
+ * @returns {HTMLInputElement}
+ */
+const getLetter = (rowIndex, colIndex) => {
+    return document.querySelector("row" + rowIndex + " .l" + colIndex);
+}
+
+/**
+ * @param {number} rowIndex 
  */
 const setWordStatusOn = (rowIndex) => {
     let word = getWord(rowIndex);
