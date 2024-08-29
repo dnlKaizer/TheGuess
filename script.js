@@ -2,7 +2,7 @@
  * @param {number} index 
  * @returns {HTMLInputElement[]}
  */
-let getWord = (index) => {
+const getWord = (index) => {
     let word = []
     for (let i = 0; i < 5; i++) {
         word[i] = document.querySelector("#row" + index + " .l" + (i + 1));
@@ -13,7 +13,7 @@ let getWord = (index) => {
 /**
  * @param {number} index 
  */
-let setWordStatusOn = (index) => {
+const setWordStatusOn = (index) => {
     let word = getWord(index);
     word.forEach((inputElement, i) => {
         inputElement.classList = "letter letterOn l" + i;
@@ -24,7 +24,7 @@ let setWordStatusOn = (index) => {
 /**
  * @param {number} index 
  */
-let setWordStatusOff = (index) => {
+const setWordStatusOff = (index) => {
     let word = getWord(index);
     word.forEach((inputElement, i) => {
         inputElement.classList = "letter letterOff l" + i;
