@@ -1,20 +1,26 @@
+const rows = 6;
+const cols = 5;
+
+let currentRow = 0;
+let currentCol = 0;
+
 /**
- * @param {number} index 
+ * @param {number} rowIndex 
  * @returns {HTMLInputElement[]}
  */
-const getWord = (index) => {
+const getWord = (rowIndex) => {
     let word = []
     for (let i = 0; i < 5; i++) {
-        word[i] = document.querySelector("#row" + index + " .l" + (i + 1));
+        word[i] = document.querySelector("#row" + rowIndex + " .l" + (i + 1));
     }
     return word;
 }
 
 /**
- * @param {number} index 
+ * @param {number} rowIndex 
  */
-const setWordStatusOn = (index) => {
-    let word = getWord(index);
+const setWordStatusOn = (rowIndex) => {
+    let word = getWord(rowIndex);
     word.forEach((inputElement, i) => {
         inputElement.classList = "letter letterOn l" + i;
         inputElement.disabled = false;
@@ -22,10 +28,10 @@ const setWordStatusOn = (index) => {
 }
 
 /**
- * @param {number} index 
+ * @param {number} rowIndex 
  */
-const setWordStatusOff = (index) => {
-    let word = getWord(index);
+const setWordStatusOff = (rowIndex) => {
+    let word = getWord(rowIndex);
     word.forEach((inputElement, i) => {
         inputElement.classList = "letter letterOff l" + i;
         inputElement.disabled = true;
