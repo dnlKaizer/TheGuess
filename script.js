@@ -28,9 +28,13 @@ function configLetters() {
      * @param {KeyboardEvent} event 
      */
     const validateKey = (event) => {
-        if (!isValidKey(event.key)) {
+        if (!isValidKey(event.key) || accentIsLastKey) {
+            if (event.key == "Dead") accentIsLastKey = true;
+            else accentIsLastKey = false;
             event.preventDefault();
+            return false;
         } 
+        return true;
     }
 
     /**
@@ -86,7 +90,7 @@ function configLetters() {
             });
             // Evento disparado quando uma tecla do teclado é pressionada
             element.addEventListener("keydown", (event) => {
-                validateKey(event);
+                if (!validateKey(event)) return;
                 let key = event.key; 
                 if (isLetter(key)) {
                     element.value = key;
@@ -97,6 +101,8 @@ function configLetters() {
         });
     }
 }
+
+let accentIsLastKey = false;
 
 /**
  * @param {number} rowIndex 
