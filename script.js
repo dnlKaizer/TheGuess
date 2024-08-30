@@ -8,6 +8,12 @@ function addLettersEvents() {
             // Evento disparado quando uma tecla do teclado é pressionada
             element.addEventListener("keydown", (event) => {
                 validateKey(event);
+                let key = event.key; 
+                if (isLetter(key)) {
+                    element.value = key;
+                    goNext(i, j);
+                    event.preventDefault();
+                }
             })
         });
     }
@@ -21,12 +27,17 @@ function addLettersEvents() {
 const goThroughLetters = (event, i, j) => {
     const str = event.key;
     // Verifica os casos abaixo e, se forem válidos, .focus() na próxima letra
-    if ((isLetter(str) || isArrowRight(str) || isDelete(str)) && (j + 1) < 5) {
+    if ((isArrowRight(str) || isDelete(str)) && (j + 1) < 5) {
         getLetter(i,j + 1).focus();
     }
     // Verifica os casos abaixo e, se forem válidos, .focus() na letra anterior
     if ((isBackspace(str) || isArrowLeft(str)) && (j - 1) >= 0) {
         getLetter(i, j - 1).focus();
+    }
+}
+const goNext = (i,j) => {
+    if ((j + 1) < 5) {
+        getLetter(i,j + 1).focus();
     }
 }
 /**
