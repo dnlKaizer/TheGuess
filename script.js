@@ -97,6 +97,11 @@ function configLetters() {
                     goNext(i, j);
                     event.preventDefault();
                 }
+                if (isDelete(event.key)) {
+                    element.setSelectionRange(0,0);
+                } else if (isBackspace(event.key)) {
+                    element.setSelectionRange(0,1);
+                }
             })
             // Evento disparado quando elemento entra em focus
             element.addEventListener("focus", () => {
