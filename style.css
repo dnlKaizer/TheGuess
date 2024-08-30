@@ -197,6 +197,8 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
     text-align: center;
     color: rgb(1, 1, 17);
     font-size: 2rem;
+    cursor: pointer;
+    caret-color: transparent;
 
     border: 2px solid rgb(3, 3, 31);
     border-radius: 20%;
