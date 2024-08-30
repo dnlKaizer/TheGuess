@@ -1,3 +1,6 @@
+let accentIsLastKey = false;
+let currentWord = 0;
+
 function configLetters() {
     /**
      * @param {KeyboardEvent} event
@@ -107,8 +110,6 @@ function configLetters() {
     }
 }
 
-let accentIsLastKey = false;
-
 /**
  * @param {number} rowIndex 
  * @returns {HTMLInputElement[]}
@@ -119,6 +120,18 @@ const getWord = (rowIndex) => {
         word[i] = document.querySelector("#row" + rowIndex + " .l" + i);
     }
     return word;
+}
+
+/**
+ * @param {HTMLInputElement[]} word 
+ * @returns {String}
+ */
+const passWordToString = (word) => {
+    let wordString = "";
+    word.forEach((letter) => {
+        wordString += letter.value.toLowerCase();
+    });
+    return wordString;
 }
 
 /**
