@@ -1,5 +1,6 @@
 let accentIsLastKey = false;
 let currentWord = 0;
+let dayWord = "letra";
 
 function configLetters() {
     /**
@@ -93,6 +94,11 @@ function configLetters() {
             });
             // Evento disparado quando uma tecla do teclado é pressionada
             element.addEventListener("keydown", (event) => {
+                if (event.key.toLowerCase() === "enter") {
+                    event.preventDefault();
+                    jogar();
+                    return;
+                }
                 if (!validateKey(event)) return;
                 let key = event.key; 
                 if (isLetter(key)) {
@@ -109,6 +115,42 @@ function configLetters() {
         });
     }
 }
+
+const jogar = () => {
+    const word = passWordToString(getWord(currentWord));
+    if (word.length != 5) return;
+    let colors = verifyWord(word);
+    alert(colors);
+}
+
+/**
+ * @param {String} word 
+ * @returns {number[]} 
+ */
+const verifyWord = (word) => {
+    let colors = [];
+    // 0 - Letra errada
+    // 1 - Letra certa, lugar errado
+    // 2 - Letra certa, lugar certo
+    let arrayDayWord = dayWord.split("");
+    compare:
+    for (let i = 0; i < 5; i++) {
+        if (word.charAt(i) === arrayDayWord[i]) {
+            colors.push(2);
+            arrayDayWord.splice(i, 1);
+            continue;
+        } 
+        for (let j = 0; j < 5; j++) {
+            if (word.charAt(i) === arrayDayWord[j]) {
+                colors.push(1);
+                arrayDayWord.splice(j, 1);
+                continue compare;
+            }
+        }
+        colors.push(0);
+    }
+    return colors;
+} 
 
 /**
  * @param {number} rowIndex 
