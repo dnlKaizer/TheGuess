@@ -98,6 +98,11 @@ function configLetters() {
                     event.preventDefault();
                 }
             })
+            // Evento disparado quando elemento entra em focus
+            element.addEventListener("focus", () => {
+                // Seta pra sempre iniciar o cursor de texto na posição inicial
+                element.setSelectionRange(0,0);
+            })
         });
     }
 }
