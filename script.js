@@ -1,3 +1,8 @@
+let accentIsLastKey = false;
+let currentWord = 0;
+let dayWord = "letra";
+let userWon = false;
+
 function configLetters() {
     /**
      * @param {KeyboardEvent} event
@@ -90,6 +95,11 @@ function configLetters() {
             });
             // Evento disparado quando uma tecla do teclado é pressionada
             element.addEventListener("keydown", (event) => {
+                if (event.key.toLowerCase() === "enter") {
+                    event.preventDefault();
+                    jogar();
+                    return;
+                }
                 if (!validateKey(event)) return;
                 let key = event.key; 
                 if (isLetter(key)) {
@@ -107,7 +117,66 @@ function configLetters() {
     }
 }
 
-let accentIsLastKey = false;
+const jogar = () => {
+    const word = getWord(currentWord);
+
+    if (word.length != 5) return; // Informar usuário que está faltando letras
+
+    // Colocando classe letterOff e disabled true
+    setWordStatusOff(word);
+
+    // Mudando as cores
+    setWordColors(word);
+
+    // Verifica se o usuário ganhou
+    if (verifyWord(word)) return;
+
+    // Incrementa currentWord e habilita próxima word
+    if (currentWord < 5) {
+        currentWord++;
+        const nextWord = getWord(currentWord);
+        setWordStatusOn(nextWord);
+        nextWord[0].focus()
+    }
+}
+
+/**
+ * @param {HTMLInputElement[]} word 
+ * @returns {boolean}
+ */
+const verifyWord = (word) => {
+    return passWordToString(word) === dayWord;
+}
+
+/**
+ * @param {String} word 
+ * @returns {number[]} 
+ */
+const getWordColors = (word) => {
+    let colors = [0,0,0,0,0];
+    // 0 - Letra errada
+    // 1 - Letra certa, lugar errado
+    // 2 - Letra certa, lugar certo
+    let arrayDayWord = dayWord.split("");
+    for (let i = 0; i < 5; i++) {
+        if (word.charAt(i) === arrayDayWord[i]) {
+            colors[i] = 2;
+            arrayDayWord[i] = "0";
+            continue;
+        } 
+    }
+    compare:
+    for (let i = 0; i < 5; i++) {
+        for (let j = 0; j < 5; j++) {
+            if (word.charAt(i) === arrayDayWord[j]) {
+                colors[i] = 1;
+                arrayDayWord[j] = "0";
+                continue compare;
+            }
+        }
+    }
+    return colors;
+} 
 
 /**
  * @param {number} rowIndex 
@@ -122,6 +191,18 @@ const getWord = (rowIndex) => {
 }
 
 /**
+ * @param {HTMLInputElement[]} word 
+ * @returns {String}
+ */
+const passWordToString = (word) => {
+    let wordString = "";
+    word.forEach((letter) => {
+        wordString += letter.value.toLowerCase();
+    });
+    return wordString;
+}
+
+/**
  * @param {number} rowIndex 
  * @param {number} colIndex 
  * @returns {HTMLInputElement}
@@ -131,23 +212,32 @@ const getLetter = (rowIndex, colIndex) => {
 }
 
 /**
- * @param {number} rowIndex 
+ * @param {HTMLInputElement[]} word 
  */
-const setWordStatusOn = (rowIndex) => {
-    let word = getWord(rowIndex);
-    word.forEach((inputElement, i) => {
-        inputElement.classList = "letter letterOn l" + i;
-        inputElement.disabled = false;
+const setWordStatusOn = (word) => {
+    word.forEach((letter, i) => {
+        letter.classList = "letter letterOn l" + i;
+        letter.disabled = false;
     });
 }
 
 /**
- * @param {number} rowIndex 
+ * @param {HTMLInputElement[]} word 
  */
-const setWordStatusOff = (rowIndex) => {
-    let word = getWord(rowIndex);
-    word.forEach((inputElement, i) => {
-        inputElement.classList = "letter letterOff l" + i;
-        inputElement.disabled = true;
+const setWordStatusOff = (word) => {
+    word.forEach((letter, i) => {
+        letter.classList = "letter letterOff l" + i;
+        letter.disabled = true;
+    });
+}
+
+/**
+ * @param {HTMLInputElement[]} word 
+ */
+const setWordColors = (word) => {
+    let colors = getWordColors(passWordToString(word));
+    const array = [" gray", " yellow", " green"];
+    colors.forEach((color, i) => {
+        word[i].classList += array[color]
     });
 }

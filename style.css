@@ -197,10 +197,8 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
     text-align: center;
     color: rgb(1, 1, 17);
     font-size: 2rem;
-    cursor: pointer;
     caret-color: transparent;
 
-    border: 2px solid rgb(3, 3, 31);
     border-radius: 20%;
     width: 40px;
     height: 40px;
@@ -208,14 +206,30 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
 }
 
 .letter.letterOff {
-    background-color: rgba(1, 1, 17, 0.4);
+    background-color: rgba(1, 1, 17, 0.208);
     border: none;
 }
-
+.letter.letterOn {
+    cursor: pointer;
+    border: 2px solid rgb(3, 3, 31);
+}
 .letter.letterOn:focus {
     border-bottom: 4px solid rgb(1, 1, 17);
     transform: translate(0px, -2px); 
     transition: transform 0.2s; 
+}
+
+.letter.letterOff.green {
+    background-color: rgb(92, 189, 92);
+    color: white;
+}
+.letter.letterOff.yellow {
+    background-color: rgb(218, 197, 95);
+    color: white;
+}
+.letter.letterOff.gray {
+    background-color: rgb(185, 58, 58);
+    color: white;
 }
 
 .logo{
