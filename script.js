@@ -99,6 +99,7 @@ function configLetters() {
             // Evento disparado quando uma tecla do teclado é solta
             element.addEventListener("keyup", (event) => {
                 goThroughLetters(event, i, j);
+                saveLetterOnDados();
             });
             // Evento disparado quando uma tecla do teclado é pressionada
             element.addEventListener("keydown", (event) => {
@@ -134,7 +135,7 @@ const jogar = () => {
 const exec = () => {
     const word = getWord(currentWord);
 
-    if (word.length != 5) return; // Informar usuário que está faltando letras
+    if (passWordToString(word).length != 5) return; // Informar usuário que está faltando letras
 
     // Colocando classe letterOff e disabled true
     setWordStatusOff(word);
