@@ -132,12 +132,7 @@ const jogar = () => {
     if (verifyWord(word)) return;
 
     // Incrementa currentWord e habilita próxima word
-    if (currentWord < 5) {
-        currentWord++;
-        const nextWord = getWord(currentWord);
-        setWordStatusOn(nextWord);
-        nextWord[0].focus()
-    }
+    enableNextWord();
 }
 
 /**
@@ -240,4 +235,13 @@ const setWordColors = (word) => {
     colors.forEach((color, i) => {
         word[i].classList += array[color]
     });
+}
+
+const enableNextWord = () => {
+    if (currentWord < 5) {
+        currentWord++;
+        const nextWord = getWord(currentWord);
+        setWordStatusOn(nextWord);
+        nextWord[0].focus()
+    }
 }
