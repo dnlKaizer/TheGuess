@@ -118,9 +118,14 @@ function configLetters() {
 
 const jogar = () => {
     const word = passWordToString(getWord(currentWord));
-    if (word.length != 5) return;
-    let colors = verifyWord(word);
-    alert(colors);
+    
+    if (word.length != 5) return; // Informar usuário que está faltando letras
+
+    // Colocando classe letterOff e disabled = true
+    setWordStatusOff(currentWord);
+
+    // Mudando as cores
+    setWordColors(word);
 }
 
 /**
@@ -128,26 +133,27 @@ const jogar = () => {
  * @returns {number[]} 
  */
 const verifyWord = (word) => {
-    let colors = [];
+    let colors = [0,0,0,0,0];
     // 0 - Letra errada
     // 1 - Letra certa, lugar errado
     // 2 - Letra certa, lugar certo
     let arrayDayWord = dayWord.split("");
-    compare:
     for (let i = 0; i < 5; i++) {
         if (word.charAt(i) === arrayDayWord[i]) {
-            colors.push(2);
-            arrayDayWord.splice(i, 1);
+            colors[i] = 2;
+            arrayDayWord[i] = "0";
             continue;
         } 
+    }
+    compare:
+    for (let i = 0; i < 5; i++) {
         for (let j = 0; j < 5; j++) {
             if (word.charAt(i) === arrayDayWord[j]) {
-                colors.push(1);
-                arrayDayWord.splice(j, 1);
+                colors[i] = 1;
+                arrayDayWord[j] = "0";
                 continue compare;
             }
         }
-        colors.push(0);
     }
     return colors;
 } 
@@ -204,5 +210,13 @@ const setWordStatusOff = (rowIndex) => {
     word.forEach((inputElement, i) => {
         inputElement.classList = "letter letterOff l" + i;
         inputElement.disabled = true;
+    });
+}
+
+const setWordColors = (word) => {
+    let colors = verifyWord(word);
+    const array = [" gray", " yellow", " green"];
+    colors.forEach((color, i) => {
+        getLetter(currentWord, i).classList += array[color]
     });
 }
