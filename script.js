@@ -2,8 +2,13 @@ let accentIsLastKey = false;
 let currentWord = 0;
 let dayWord = "letra";
 let userWon = false;
-let dados = {}
-let today = Date.now();
+let dados = [];
+let today = new Date();
+today = {
+    day: today.getUTCDate(),
+    month: today.getUTCMonth() + 1,
+    year: today.getUTCFullYear()
+}
 
 function configLetters() {
     /**
@@ -108,6 +113,7 @@ function configLetters() {
                     element.value = key;
                     goNext(i, j);
                     event.preventDefault();
+                    saveLetterOnDados();
                 }
                 if (isDelete(event.key)) {
                     element.setSelectionRange(0,0);
@@ -122,7 +128,7 @@ function configLetters() {
 }
 
 const jogar = () => {
-    // saveWordOnDados(currentWord);
+    saveWordOnDados(currentWord);
     exec();
 }
 const exec = () => {
@@ -254,11 +260,31 @@ const enableNextWord = () => {
     }
 }
 
+const saveLetterOnDados = () => {
+    let word = getWord(currentWord);
+    dados[currentWord].string = passWordToString(word);
+    sessionStorage.setItem("dados", JSON.stringify(dados));
+}
+
+const saveWordOnDados = () => {
+    dados[currentWord].played = true;
+    sessionStorage.setItem("dados", JSON.stringify(dados));
+}
+
 /**
- * @param { {index: number, string: String, played: boolean, date: number} } wordObj
+ * @param { [{index: number, string: String, played: boolean, date: Date}] } dados
+ */
+const setDadosDate = (dados) => {
+    dados.forEach(word => {
+        word.date = today;
+    });
+}
+
+/**
+ * @param { {index: number, string: String, played: boolean, date: Date} } wordObj
  */
 const setWordFromDados = (wordObj) => {
-    let {index, string, played, date} = wordObj;
+    let {index, string, played,} = wordObj;
 
     let word = getWord(index);
     word.forEach((letter, i) => {
@@ -270,50 +296,52 @@ const setWordFromDados = (wordObj) => {
     }
 }
 
-/**
- * @param { {index: number, string: String, played: boolean, date: number} } wordObj 
- * @param {number} i 
- */
-const saveDataOnDados = (wordObj, i) => {
-    dados[i] = wordObj;
-}
-
-const loadData = async () => {
-    if(!localStorage.getItem("dados")){
-        try {  
-            const response = await fetch('./data.json');
-            const data = await response.json();
-
-            data.forEach((wordObj, i) => {
+const loadData = () => {
+    if (sessionStorage.getItem("dados")) {
+        dados = [...JSON.parse(sessionStorage.getItem("dados"))];
+        let dateOfObj = dados[0].date;
+        if (compareDates(dateOfObj, today)) {
+            dados.forEach((wordObj) => {
                 setWordFromDados(wordObj);
-                saveDataOnDados(wordObj, i);
-            }); // ECMASCRIPT FOREACH
-
-            dados = [...data]; // ECMASCRIPT SPREAD OPERATOR
-        } catch (err) {    
-            alert(`Atenção: Erro ${err}`); // ECMASCRIPT TEMPLATE LITERAL
-            console.error(err);
+            }); 
+        } else {
+            getStorageData();
         }
-    }else if (!sessionStorage.getItem("dados")) {
-        try {  
-            const response = await fetch('./data.json');
-            const data = await response.json();
-
-            data.forEach((word, i) => {
+    } else if (localStorage.getItem("dados")) {
+        dados = [...JSON.parse(localStorage.getItem("dados"))];
+        if (compareDates(dados[0].date, today)) {
+            dados.forEach((wordObj) => {
                 setWordFromDados(wordObj);
-                saveDataOnDados(wordObj, i);
-            }); // ECMASCRIPT FOREACH
-
-            dados = [...data]; // ECMASCRIPT SPREAD OPERATOR
-        } catch (err) {    
-            alert(`Atenção: Erro ${err}`); // ECMASCRIPT TEMPLATE LITERAL
-            console.error(err);
+            }); 
+        } else {
+            getStorageData();
         }
     } else {
-        dados = [...JSON.parse(localStorage.getItem("dados"))];
-
-        dados.forEach((wordObj) => {
-            setWordFromDados(wordObj);
-        }); 
+        getStorageData();
     }
+}
+
+const getStorageData = async () => {
+    try {  
+        const response = await fetch('./data.json');
+        const data = await response.json();
+
+        dados = [...data];
+        setDadosDate(dados);
+
+        // ADICIONAR AQUI CASO EM QUE USUÁRIO ESTÁ LOGADO
+        sessionStorage.setItem("dados", JSON.stringify(dados));
+
+    } catch (err) {    
+        alert(`Atenção: Erro ${err}`);
+        console.error(err);
+    }
+}
+
+/**
+ * @param { {day: number, month: number, year: number} } date1 
+ * @param { {day: number, month: number, year: number} } date2 
+ */
+const compareDates = (date1, date2) => {
+    return (date1.day == date2.day && date1.month == date2.month && date1.year == date2.year);
 }
