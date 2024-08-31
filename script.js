@@ -2,6 +2,8 @@ let accentIsLastKey = false;
 let currentWord = 0;
 let dayWord = "letra";
 let userWon = false;
+let dados = {}
+let today = Date.now();
 
 function configLetters() {
     /**
@@ -115,9 +117,15 @@ function configLetters() {
             })
         });
     }
+
+    loadData();
 }
 
 const jogar = () => {
+    // saveWordOnDados(currentWord);
+    exec();
+}
+const exec = () => {
     const word = getWord(currentWord);
 
     if (word.length != 5) return; // Informar usuário que está faltando letras
@@ -243,5 +251,69 @@ const enableNextWord = () => {
         const nextWord = getWord(currentWord);
         setWordStatusOn(nextWord);
         nextWord[0].focus()
+    }
+}
+
+/**
+ * @param { {index: number, string: String, played: boolean, date: number} } wordObj
+ */
+const setWordFromDados = (wordObj) => {
+    let {index, string, played, date} = wordObj;
+
+    let word = getWord(index);
+    word.forEach((letter, i) => {
+        letter.value = string.charAt(i);
+    });
+
+    if (played) {
+        exec();
+    }
+}
+
+/**
+ * @param { {index: number, string: String, played: boolean, date: number} } wordObj 
+ * @param {number} i 
+ */
+const saveDataOnDados = (wordObj, i) => {
+    dados[i] = wordObj;
+}
+
+const loadData = async () => {
+    if(!localStorage.getItem("dados")){
+        try {  
+            const response = await fetch('./data.json');
+            const data = await response.json();
+
+            data.forEach((wordObj, i) => {
+                setWordFromDados(wordObj);
+                saveDataOnDados(wordObj, i);
+            }); // ECMASCRIPT FOREACH
+
+            dados = [...data]; // ECMASCRIPT SPREAD OPERATOR
+        } catch (err) {    
+            alert(`Atenção: Erro ${err}`); // ECMASCRIPT TEMPLATE LITERAL
+            console.error(err);
+        }
+    }else if (!sessionStorage.getItem("dados")) {
+        try {  
+            const response = await fetch('./data.json');
+            const data = await response.json();
+
+            data.forEach((word, i) => {
+                setWordFromDados(wordObj);
+                saveDataOnDados(wordObj, i);
+            }); // ECMASCRIPT FOREACH
+
+            dados = [...data]; // ECMASCRIPT SPREAD OPERATOR
+        } catch (err) {    
+            alert(`Atenção: Erro ${err}`); // ECMASCRIPT TEMPLATE LITERAL
+            console.error(err);
+        }
+    } else {
+        dados = [...JSON.parse(localStorage.getItem("dados"))];
+
+        dados.forEach((wordObj) => {
+            setWordFromDados(wordObj);
+        }); 
     }
 }
