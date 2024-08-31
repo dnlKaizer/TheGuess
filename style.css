@@ -86,6 +86,9 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
 .container__landing{
     gap: 20px;
 }
+.container__home {
+    gap: 40px;
+}
 
 .main__links{
     display: flex;
