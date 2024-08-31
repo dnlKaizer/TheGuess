@@ -2,6 +2,13 @@ let accentIsLastKey = false;
 let currentWord = 0;
 let dayWord = "letra";
 let userWon = false;
+let dados = [];
+let today = new Date();
+today = {
+    day: today.getUTCDate(),
+    month: today.getUTCMonth() + 1,
+    year: today.getUTCFullYear()
+}
 
 function configLetters() {
     /**
@@ -106,6 +113,7 @@ function configLetters() {
                     element.value = key;
                     goNext(i, j);
                     event.preventDefault();
+                    saveLetterOnDados();
                 }
                 if (isDelete(event.key)) {
                     element.setSelectionRange(0,0);
@@ -115,9 +123,15 @@ function configLetters() {
             })
         });
     }
+
+    loadData();
 }
 
 const jogar = () => {
+    saveWordOnDados(currentWord);
+    exec();
+}
+const exec = () => {
     const word = getWord(currentWord);
 
     if (word.length != 5) return; // Informar usuário que está faltando letras
@@ -132,12 +146,7 @@ const jogar = () => {
     if (verifyWord(word)) return;
 
     // Incrementa currentWord e habilita próxima word
-    if (currentWord < 5) {
-        currentWord++;
-        const nextWord = getWord(currentWord);
-        setWordStatusOn(nextWord);
-        nextWord[0].focus()
-    }
+    enableNextWord();
 }
 
 /**
@@ -240,4 +249,99 @@ const setWordColors = (word) => {
     colors.forEach((color, i) => {
         word[i].classList += array[color]
     });
+}
+
+const enableNextWord = () => {
+    if (currentWord < 5) {
+        currentWord++;
+        const nextWord = getWord(currentWord);
+        setWordStatusOn(nextWord);
+        nextWord[0].focus()
+    }
+}
+
+const saveLetterOnDados = () => {
+    let word = getWord(currentWord);
+    dados[currentWord].string = passWordToString(word);
+    sessionStorage.setItem("dados", JSON.stringify(dados));
+}
+
+const saveWordOnDados = () => {
+    dados[currentWord].played = true;
+    sessionStorage.setItem("dados", JSON.stringify(dados));
+}
+
+/**
+ * @param { [{index: number, string: String, played: boolean, date: Date}] } dados
+ */
+const setDadosDate = (dados) => {
+    dados.forEach(word => {
+        word.date = today;
+    });
+}
+
+/**
+ * @param { {index: number, string: String, played: boolean, date: Date} } wordObj
+ */
+const setWordFromDados = (wordObj) => {
+    let {index, string, played,} = wordObj;
+
+    let word = getWord(index);
+    word.forEach((letter, i) => {
+        letter.value = string.charAt(i);
+    });
+
+    if (played) {
+        exec();
+    }
+}
+
+const loadData = () => {
+    if (sessionStorage.getItem("dados")) {
+        dados = [...JSON.parse(sessionStorage.getItem("dados"))];
+        let dateOfObj = dados[0].date;
+        if (compareDates(dateOfObj, today)) {
+            dados.forEach((wordObj) => {
+                setWordFromDados(wordObj);
+            }); 
+        } else {
+            getStorageData();
+        }
+    } else if (localStorage.getItem("dados")) {
+        dados = [...JSON.parse(localStorage.getItem("dados"))];
+        if (compareDates(dados[0].date, today)) {
+            dados.forEach((wordObj) => {
+                setWordFromDados(wordObj);
+            }); 
+        } else {
+            getStorageData();
+        }
+    } else {
+        getStorageData();
+    }
+}
+
+const getStorageData = async () => {
+    try {  
+        const response = await fetch('./data.json');
+        const data = await response.json();
+
+        dados = [...data];
+        setDadosDate(dados);
+
+        // ADICIONAR AQUI CASO EM QUE USUÁRIO ESTÁ LOGADO
+        sessionStorage.setItem("dados", JSON.stringify(dados));
+
+    } catch (err) {    
+        alert(`Atenção: Erro ${err}`);
+        console.error(err);
+    }
+}
+
+/**
+ * @param { {day: number, month: number, year: number} } date1 
+ * @param { {day: number, month: number, year: number} } date2 
+ */
+const compareDates = (date1, date2) => {
+    return (date1.day == date2.day && date1.month == date2.month && date1.year == date2.year);
 }
