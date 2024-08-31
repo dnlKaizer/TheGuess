@@ -125,6 +125,8 @@ function configLetters() {
         });
     }
 
+    getLetter(0,0).focus();
+
     loadData();
 }
 
