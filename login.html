@@ -28,18 +28,18 @@
                 <div class="input__container">
                     <div class="email">
                         <label class="label" for="login-email">Email:</label>
-                        <input class="input" id="login-email" type="email" placeholder="user@gmail.com" name="email">
+                        <input class="input" id="login-email" type="email" placeholder="user@gmail.com" name="email" required>
                     </div>
                     <div class="password">
                         <label class="label" for="login-password">Senha:</label>
-                        <input class="input" id="login-password" type="password" placeholder="senha123" name="senha">        
+                        <input class="input" id="login-password" type="password" placeholder="senha123" name="senha" required>        
                     </div>
                     <div>
                         <input type="checkbox" id="login-lembrar">
                         <label for="login-lembrar">Lembrar-me</label>                        
                     </div>
                 </div>
-                <button class="button">Login</button>
+                <button class="button" onclick="login()">Login</button>
             </form>
         </div>
 
