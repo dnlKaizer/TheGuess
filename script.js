@@ -380,13 +380,16 @@ const loadUserLogged = () => {
         let user = JSON.parse(sessionStorage.getItem("user"));
         appendDivUser();
         updateDivUser(user.username);
+        return true;
     } else if (localStorage.getItem("remember")) {
         const userIndex = JSON.parse(localStorage.getItem("remember"));
         if (userIndex == -1) return;
         const user = getUserLocalStorage(userIndex);
         appendDivUser();
         updateDivUser(user.username);
+        return true;
     }
+    return false;
 }
 
 const getStorageData = () => {
@@ -583,4 +586,37 @@ const appendDivUser = () => {
 const updateDivUser = (username) => {
     const divs = document.getElementsByClassName("user");
     divs[0].innerHTML = username;        
+}
+
+const loadLanding = () => {
+    if (loadUserLogged()) appendLogoutDiv();
+}
+
+const appendLogoutDiv = () => {
+    const div = document.createElement("div");
+    div.classList = "logout";
+
+    const button = document.createElement("button");
+    button.classList = "header__button";
+    button.addEventListener("click", () => {
+        logout();
+    });
+
+    const img = document.createElement("img");
+    img.classList = "header__logout";
+    img.src = "./imagens/logout.png";
+
+    button.appendChild(img);
+    div.appendChild(button);
+
+    const headers = document.getElementsByClassName("container__header");
+    headers[0].appendChild(div);
+}
+
+const logout = () => {
+    sessionStorage.clear();
+    if (localStorage.getItem("remember")) {
+        localStorage.setItem("remember", JSON.stringify(-1));
+    }
+    window.location.reload();
 }
