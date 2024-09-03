@@ -11,6 +11,24 @@ today = {
 let activeUser;
 
 function configLetters() {
+    const getDayLetter = async () => {
+        try {  
+            const response = await fetch('./palavras.json');
+            const palavras = await response.json();
+            for (let i = 0; i < palavras.length; i++) {
+                const data = palavras[i].data;
+                const palavra = palavras[i].palavra;
+                if (compareDates(data, today)) {
+                    dayWord = palavra;
+                    break;
+                }
+            }
+        } catch (err) {    
+            alert(`Atenção: Erro ${err}`); // ECMASCRIPT TEMPLATE LITERAL
+            console.error(err);
+        }
+    }
+
     /**
      * @param {KeyboardEvent} event
      * @param {number} i
@@ -19,7 +37,7 @@ function configLetters() {
     const goThroughLetters = (event, i, j) => {
         const str = event.key;
         // Verifica os casos abaixo e, se forem válidos, .focus() na próxima letra
-        if ((isLetter(str) || isArrowRight(str) || isDelete(str)) && (j + 1) < 5) {
+        if ((isArrowRight(str) || isDelete(str)) && (j + 1) < 5) {
             getLetter(i,j + 1).focus();
         }
         // Verifica os casos abaixo e, se forem válidos, .focus() na letra anterior
@@ -93,6 +111,8 @@ function configLetters() {
         return isLetter(char) || isBackspace(char) || isArrowLeft(char)
         || isArrowRight(char) || isDelete(char) || char.toLowerCase() == "tab";
     }
+
+    getDayLetter();
 
     loadUserLogged();
 
