@@ -1,6 +1,6 @@
 let accentIsLastKey = false;
 let currentWord = 0;
-let dayWord = "letra";
+let dayWord = "";
 let dados = [];
 let today = new Date();
 today = {
@@ -12,6 +12,7 @@ let activeUser;
 
 function configLetters() {
     const getDayLetter = async () => {
+        
         try {  
             const response = await fetch('./palavras.json');
             const palavras = await response.json();
@@ -111,8 +112,12 @@ function configLetters() {
         return isLetter(char) || isBackspace(char) || isArrowLeft(char)
         || isArrowRight(char) || isDelete(char) || char.toLowerCase() == "tab";
     }
+    const main = async () => {
+        await getDayLetter();
+        loadData();
+    }
 
-    getDayLetter();
+    main();
 
     loadUserLogged();
 
@@ -148,8 +153,6 @@ function configLetters() {
     }
 
     getLetter(0,0).focus();
-
-    loadData();
 }
 
 const jogar = () => {
