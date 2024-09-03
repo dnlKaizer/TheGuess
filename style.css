@@ -27,6 +27,12 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
     position: absolute;
 }
 
+.logout {
+    right: 0;
+    margin-right: 15px;
+    position: absolute;
+}
+
 .user {
     left: 0;
     margin-left: 15px;
@@ -53,7 +59,15 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
 .header__img {
     width: 32px;
     height: 32px;
-    padding: 2px;
+    padding: 4px;
+}
+
+.header__logout {
+    width: 32px;
+    height: 32px;
+    padding: 4px;
+    transform: translate(1px, 1px); 
+    cursor: pointer;
 }
 
 .container{
@@ -149,22 +163,6 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
     justify-content: center;
     flex-direction: column;
 }
-/* @media only screen and (max-width: 600px) {
-    
-}
-@media only screen and (min-width: 600px) {
-
-}
-@media only screen and (min-width: 768px) {
-
-}
-@media only screen and (min-width: 992px) {
-
-}
-@media only screen and (min-width: 1200px) {
-
-} */
-
 
 .form__title {
     width: 100%;
