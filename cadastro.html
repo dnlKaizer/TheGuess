@@ -8,7 +8,7 @@
     <title>Cadastro</title>
 </head>
 
-<body>
+<body onload="configCadastro()">
     <script src="./script.js"></script>
     <header class="header">
         <div class="container container__header">
@@ -23,12 +23,12 @@
     
     <section class="cadastro">
         <div class="container container__login">
-            <form class="form" action="./home.html">
+            <form class="form" id="cadastro-form" action="./home.html">
                 <h2 class="form__title">Cadastro</h2>
                 <div class="input__container">
                     <div class="username">
-                        <label class="label" for="login-username">Username:</label>
-                        <input class="input" id="login-username" type="text" placeholder="jober3427" required>
+                        <label class="label" for="cadastro-username">Username:</label>
+                        <input class="input" id="cadastro-username" type="text" placeholder="jober3427" required>
                     </div>
                     <div class="email">
                         <label class="label" for="cadastro-email">Email:</label>
@@ -47,7 +47,7 @@
                         <label for="cadastro-lembrar">Lembrar-me</label>                        
                     </div>
                 </div>
-                <button class="button" onclick="cadastrar()">Cadastrar</button>
+                <button class="button">Cadastrar</button>
             </form>
         </div>
     
