@@ -128,7 +128,6 @@ function configLetters() {
     getLetter(0,0).focus();
 
     loadData();
-    loadUser();
 }
 
 const jogar = () => {
@@ -280,7 +279,7 @@ const saveLetterOnDados = () => {
         sessionStorage.setItem("dados", JSON.stringify(dados));
     } else {
         activeUser.dados[currentWord].string = passWordToString(word);
-        updateUser(activeUser);
+        saveUserSessionStorage(activeUser);
     }
 }
 
@@ -290,14 +289,9 @@ const saveWordOnDados = () => {
         sessionStorage.setItem("dados", JSON.stringify(dados));
     } else {
         activeUser.dados[currentWord].played = true;
-        updateUser(activeUser);
+        saveUserSessionStorage(activeUser);
+        saveUserLocalStorage(activeUser);
     }
-}
-
-const updateUser = (user) => {
-    let users =[...JSON.parse(localStorage.getItem("users"))];
-    users[user.index] = user;
-    localStorage.setItem("users", JSON.stringify(users));
 }
 
 /**
@@ -326,31 +320,54 @@ const setWordFromDados = (wordObj) => {
 }
 
 const loadData = () => {
-    if (sessionStorage.getItem("dados")) {
-        dados = [...JSON.parse(sessionStorage.getItem("dados"))];
-        let dateOfObj = dados[0].date;
-        if (compareDates(dateOfObj, today)) {
-            dados.forEach((wordObj) => {
-                setWordFromDados(wordObj);
-            }); 
+    if (sessionStorage.getItem("user")) {
+        let user = getUserSessionStorage();
+        dados = [...user.dados];
+        if (compareDates(dados[0].date, today)) {
+            loadWord();
         } else {
             dados = getStorageData();
-            saveDataOnSessionStorage(dados);
+            user.dados = dados;
+            saveUserSessionStorage(user);
+            saveUserLocalStorage(user);
         }
-    } else {
-        dados = getStorageData();
-        saveDataOnSessionStorage(dados);
-    }
+        activeUser = user;
+        return;
+    } 
+    if (localStorage.getItem("remember")) {
+        let userIndex = JSON.parse(localStorage.getItem("remember"));
+        if (userIndex != -1) {
+            let user = getUserLocalStorage(userIndex);
+            dados = [...user.dados];
+            if (compareDates(dados[0].date, today)) {
+                loadWord();
+            } else {
+                dados = getStorageData();
+                user.dados = dados;
+                sessionStorage.clear();
+                saveUserSessionStorage(user);
+                saveUserLocalStorage(user);
+            }
+            activeUser = user;
+            return;
+        }
+    } 
+    if (sessionStorage.getItem("dados")) {
+        dados = JSON.parse(sessionStorage.getItem("dados"));
+        const dia = dados[0].date;
+        if (compareDates(dia, today)) {
+            loadWord();
+            return;
+        } 
+    } 
+    dados = getStorageData();
+    sessionStorage.setItem("dados", JSON.stringify(dados));
 }
-const loadUser = () => {
-    if (localStorage.getItem("activeUserIndex")) {
-        let users = JSON.parse(localStorage.getItem("users"));
-        activeUser = JSON.parse(localStorage.getItem("activeUserIndex"));
-        activeUser = users[activeUser];
-    } else {
-        activeUser = null;
-    }
-}
+const loadWord = () => {
+    dados.forEach((wordObj) => {
+        setWordFromDados(wordObj);
+    }); 
+} 
 
 const getStorageData = () => {
     let data = [
@@ -393,9 +410,6 @@ const getStorageData = () => {
     ]
     return data;
 }
-const saveDataOnSessionStorage = (data) => {
-    sessionStorage.setItem("dados", JSON.stringify(dados));
-}
 
 /**
  * @param { {day: number, month: number, year: number} } date1 
@@ -407,12 +421,6 @@ const compareDates = (date1, date2) => {
 
 const configCadastro = () => {
 
-    /**
-     * 
-     * @param {String} username 
-     * @param {String} email 
-     * @returns {boolean}
-     */
     const verifyIfExists = (username, email) => {
         if (localStorage.getItem("users")) {
             let users = JSON.parse(localStorage.getItem("users"));
@@ -475,7 +483,11 @@ const configCadastro = () => {
         }
 
         let user = createUser(username, email, password);
-        if (lembrar) rememberUser(user);
+        if (lembrar) {
+            localStorage.setItem("remember", JSON.stringify(user.index));
+        } else {
+            localStorage.setItem("remember", JSON.stringify(-1));
+        }
         
         addUserToLocalStorage(user);
 
@@ -507,17 +519,34 @@ const configLogin = () => {
             return;
         }
 
-        if (lembrar) rememberUser(user);
+        if (lembrar) {
+            localStorage.setItem("remember", JSON.stringify(user.index));
+        } else {
+            localStorage.setItem("remember", JSON.stringify(-1));
+        }
 
         activateUser(user);
     })
 }
 
 const activateUser = (user) => {
+    sessionStorage.clear();
     activeUser = user;
-    localStorage.setItem("activeUserIndex", JSON.stringify(user.index));
+    saveUserSessionStorage(user);
 }
 
-const rememberUser = (user) => {
-    localStorage.setItem("remember", JSON.stringify(user.index));
-}  
+const getUserSessionStorage = () => {
+    return JSON.parse(sessionStorage.getItem("user"));
+}
+const getUserLocalStorage = (userIndex) => {
+    let users = [...JSON.parse(localStorage.getItem("users"))];
+    return users[userIndex];
+}
+const saveUserSessionStorage = (user) => {
+    sessionStorage.setItem("user", JSON.stringify(user));
+}
+const saveUserLocalStorage = (user) => {
+    let users = [...JSON.parse(localStorage.getItem("users"))];
+    users[user.index] = user;
+    localStorage.setItem("users", JSON.stringify(users));
+}
