@@ -90,6 +90,10 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
     gap: 40px;
 }
 
+.container__link {
+    margin-bottom: 20px;
+}
+
 .main__links{
     display: flex;
     flex-direction: column;
@@ -162,7 +166,7 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
     margin-bottom: 30px;
 }
 
-.email, .password, .confirm__password {
+.username, .email, .password, .confirm__password {
     margin-bottom: 20px;
 }
 
