@@ -8,7 +8,7 @@
     <title>Login</title>
 </head>
 
-<body>
+<body onload="configLogin()">
     <script src="./script.js"></script>
     <header class="header">
         <div class="container container__header">
@@ -23,7 +23,7 @@
     
     <section class="login">
         <div class="container container__login">
-            <form class="form" action="./home.html">
+            <form class="form" id="login-form" action="./home.html">
                 <h2 class="form__title">Login</h2>
                 <div class="input__container">
                     <div class="username">
@@ -39,7 +39,7 @@
                         <label for="login-lembrar">Lembrar-me</label>                        
                     </div>
                 </div>
-                <button class="button" onclick="login()">Login</button>
+                <button class="button">Login</button>
             </form>
         </div>
 

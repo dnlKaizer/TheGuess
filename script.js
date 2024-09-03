@@ -1,7 +1,6 @@
 let accentIsLastKey = false;
 let currentWord = 0;
 let dayWord = "letra";
-let userWon = false;
 let dados = [];
 let today = new Date();
 today = {
@@ -9,6 +8,7 @@ today = {
     month: today.getUTCMonth() + 1,
     year: today.getUTCFullYear()
 }
+let activeUser;
 
 function configLetters() {
     /**
@@ -146,10 +146,26 @@ const exec = () => {
     setWordColors(word);
 
     // Verifica se o usuário ganhou
-    if (verifyWord(word)) return;
+    if (verifyWord(word)) {
+        if (activeUser != null) {
+            activeUser.matches += 1;
+            activeUser.victories += 1;
+            saveUserSessionStorage(activeUser);
+            saveUserLocalStorage(activeUser);
+        }
+        return;
+    };
 
-    // Incrementa currentWord e habilita próxima word
-    enableNextWord();
+    if (currentWord < 5) {
+        // Incrementa currentWord e habilita próxima word
+        enableNextWord();
+    } else {
+        if (activeUser != null) {
+            activeUser.matches += 1;
+            saveUserSessionStorage(activeUser);
+            saveUserLocalStorage(activeUser);
+        }
+    }
 }
 
 /**
@@ -255,23 +271,32 @@ const setWordColors = (word) => {
 }
 
 const enableNextWord = () => {
-    if (currentWord < 5) {
-        currentWord++;
-        const nextWord = getWord(currentWord);
-        setWordStatusOn(nextWord);
-        nextWord[0].focus()
-    }
+    currentWord++;
+    const nextWord = getWord(currentWord);
+    setWordStatusOn(nextWord);
+    nextWord[0].focus()
 }
 
 const saveLetterOnDados = () => {
     let word = getWord(currentWord);
     dados[currentWord].string = passWordToString(word);
-    sessionStorage.setItem("dados", JSON.stringify(dados));
+    if (activeUser == null) {
+        sessionStorage.setItem("dados", JSON.stringify(dados));
+    } else {
+        activeUser.dados[currentWord].string = passWordToString(word);
+        saveUserSessionStorage(activeUser);
+    }
 }
 
 const saveWordOnDados = () => {
     dados[currentWord].played = true;
-    sessionStorage.setItem("dados", JSON.stringify(dados));
+    if (activeUser == null) {
+        sessionStorage.setItem("dados", JSON.stringify(dados));
+    } else {
+        activeUser.dados[currentWord].played = true;
+        saveUserSessionStorage(activeUser);
+        saveUserLocalStorage(activeUser);
+    }
 }
 
 /**
@@ -300,45 +325,95 @@ const setWordFromDados = (wordObj) => {
 }
 
 const loadData = () => {
-    if (sessionStorage.getItem("dados")) {
-        dados = [...JSON.parse(sessionStorage.getItem("dados"))];
-        let dateOfObj = dados[0].date;
-        if (compareDates(dateOfObj, today)) {
-            dados.forEach((wordObj) => {
-                setWordFromDados(wordObj);
-            }); 
-        } else {
-            getStorageData();
-        }
-    } else if (localStorage.getItem("dados")) {
-        dados = [...JSON.parse(localStorage.getItem("dados"))];
+    if (sessionStorage.getItem("user")) {
+        let user = getUserSessionStorage();
+        dados = [...user.dados];
         if (compareDates(dados[0].date, today)) {
-            dados.forEach((wordObj) => {
-                setWordFromDados(wordObj);
-            }); 
+            loadWord();
         } else {
-            getStorageData();
+            dados = getStorageData();
+            user.dados = dados;
+            saveUserSessionStorage(user);
+            saveUserLocalStorage(user);
         }
-    } else {
-        getStorageData();
-    }
+        activeUser = user;
+        return;
+    } 
+    if (localStorage.getItem("remember")) {
+        let userIndex = JSON.parse(localStorage.getItem("remember"));
+        if (userIndex != -1) {
+            let user = getUserLocalStorage(userIndex);
+            dados = [...user.dados];
+            if (compareDates(dados[0].date, today)) {
+                loadWord();
+            } else {
+                dados = getStorageData();
+                user.dados = dados;
+                sessionStorage.clear();
+                saveUserSessionStorage(user);
+                saveUserLocalStorage(user);
+            }
+            activeUser = user;
+            return;
+        }
+    } 
+    if (sessionStorage.getItem("dados")) {
+        dados = JSON.parse(sessionStorage.getItem("dados"));
+        const dia = dados[0].date;
+        if (compareDates(dia, today)) {
+            loadWord();
+            return;
+        } 
+    } 
+    dados = getStorageData();
+    sessionStorage.setItem("dados", JSON.stringify(dados));
 }
+const loadWord = () => {
+    dados.forEach((wordObj) => {
+        setWordFromDados(wordObj);
+    }); 
+} 
 
-const getStorageData = async () => {
-    try {  
-        const response = await fetch('./data.json');
-        const data = await response.json();
-
-        dados = [...data];
-        setDadosDate(dados);
-
-        // ADICIONAR AQUI CASO EM QUE USUÁRIO ESTÁ LOGADO
-        sessionStorage.setItem("dados", JSON.stringify(dados));
-
-    } catch (err) {    
-        alert(`Atenção: Erro ${err}`);
-        console.error(err);
-    }
+const getStorageData = () => {
+    let data = [
+        {
+            index: 0,
+            string: "",
+            played: false,
+            date: today
+        },
+        {
+            index: 1,
+            string: "",
+            played: false,
+            date: today
+        },
+        {
+            index: 2,
+            string: "",
+            played: false,
+            date: today
+        },
+        {
+            index: 3,
+            string: "",
+            played: false,
+            date: today
+        },
+        {
+            index: 4,
+            string: "",
+            played: false,
+            date: today
+        },
+        {
+            index: 5,
+            string: "",
+            played: false,
+            date: today
+        }
+    ]
+    return data;
 }
 
 /**
@@ -347,4 +422,136 @@ const getStorageData = async () => {
  */
 const compareDates = (date1, date2) => {
     return (date1.day == date2.day && date1.month == date2.month && date1.year == date2.year);
+}
+
+const configCadastro = () => {
+
+    const verifyIfExists = (username, email) => {
+        if (localStorage.getItem("users")) {
+            let users = JSON.parse(localStorage.getItem("users"));
+            for (let i = 0; i < users.length; i++) {
+                if (users[i].username == username || users[i].email == email) return true;
+            }
+        }
+        return false;
+    }
+
+    const createUser = (username, email, password) => {
+        const user = {
+            index: getNUsers(),
+            username: username,
+            email: email,
+            password: password,
+            victories: 0,
+            matches: 0,
+            dados: getStorageData()
+        }
+        return user;
+    }
+
+    const getNUsers = () => {
+        if (localStorage.getItem("users")) {
+            return JSON.parse(localStorage.getItem("users")).length;
+        } else {
+            return 0;
+        }
+    }
+
+    const addUserToLocalStorage = (user) => {
+        let users;
+        if (localStorage.getItem("users")) {
+            users = JSON.parse(localStorage.getItem("users"));
+        } else {
+            users = [];
+        }
+        users.push(user);
+        localStorage.setItem("users", JSON.stringify(users));
+    }
+
+    const form = document.querySelector("#cadastro-form");
+    form.addEventListener("submit", (event) => {
+        const username = document.querySelector("#cadastro-username").value;
+        const email = document.querySelector("#cadastro-email").value;
+        const password = document.querySelector("#cadastro-password").value;
+        const c_password = document.querySelector("#cadastro-confirm__password").value;
+        const lembrar = document.querySelector("#cadastro-lembrar").checked;
+
+        if (verifyIfExists(username, email)) {
+            alert("Nome de usuário e/ou email já existentes.");
+            event.preventDefault();
+            return;
+        }
+        if (password != c_password) {
+            alert("Senhas não conferem.")
+            event.preventDefault();
+            return;
+        }
+
+        let user = createUser(username, email, password);
+        if (lembrar) {
+            localStorage.setItem("remember", JSON.stringify(user.index));
+        } else {
+            localStorage.setItem("remember", JSON.stringify(-1));
+        }
+        
+        addUserToLocalStorage(user);
+
+        activateUser(user);
+    })
+}
+
+const configLogin = () => {
+    const findUser = (username, password) => {
+        if (localStorage.getItem("users")) {
+            let users = JSON.parse(localStorage.getItem("users"));
+            for (let i = 0; i < users.length; i++) {
+                if (users[i].username == username && users[i].password == password) return users[i];
+            }
+        } 
+        return null;
+    }
+
+    const form = document.querySelector("#login-form");
+    form.addEventListener("submit", (event) => {
+        const username = document.querySelector("#login-username").value;
+        const password = document.querySelector("#login-password").value;
+        const lembrar = document.querySelector("#login-lembrar").checked;
+
+        let user = findUser(username, password);
+        if (user == null) {
+            alert("Usuário e/ou senha inválidos.")
+            event.preventDefault();
+            return;
+        }
+
+        if (lembrar) {
+            localStorage.setItem("remember", JSON.stringify(user.index));
+        } else {
+            localStorage.setItem("remember", JSON.stringify(-1));
+        }
+
+        activateUser(user);
+    })
+}
+
+const activateUser = (user) => {
+    sessionStorage.clear();
+    activeUser = user;
+    saveUserSessionStorage(user);
+}
+
+const getUserSessionStorage = () => {
+    return JSON.parse(sessionStorage.getItem("user"));
+}
+const getUserLocalStorage = (userIndex) => {
+    let users = [...JSON.parse(localStorage.getItem("users"))];
+    return users[userIndex];
+}
+const saveUserSessionStorage = (user) => {
+    sessionStorage.setItem("user", JSON.stringify(user));
+}
+const saveUserLocalStorage = (user) => {
+    let users = [...JSON.parse(localStorage.getItem("users"))];
+    users[user.index] = user;
+    localStorage.setItem("users", JSON.stringify(users));
 }
