@@ -19,7 +19,7 @@ function configLetters() {
     const goThroughLetters = (event, i, j) => {
         const str = event.key;
         // Verifica os casos abaixo e, se forem válidos, .focus() na próxima letra
-        if ((isArrowRight(str) || isDelete(str)) && (j + 1) < 5) {
+        if ((isLetter(str) || isArrowRight(str) || isDelete(str)) && (j + 1) < 5) {
             getLetter(i,j + 1).focus();
         }
         // Verifica os casos abaixo e, se forem válidos, .focus() na letra anterior
