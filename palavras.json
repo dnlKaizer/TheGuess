@@ -1,6 +1,14 @@
 [
     {
       "data": {
+        "day": 3,
+        "month": 9,
+        "year": 2024
+      },
+      "palavra": "pedra"
+    },
+    {
+      "data": {
         "day": 4,
         "month": 9,
         "year": 2024
@@ -125,7 +133,7 @@
         "month": 9,
         "year": 2024
       },
-      "palavra": "melho"
+      "palavra": "molho"
     },
     {
       "data": {
@@ -213,7 +221,7 @@
         "month": 9,
         "year": 2024
       },
-      "palavra": "guida"
+      "palavra": "ponte"
     },
     {
       "data": {

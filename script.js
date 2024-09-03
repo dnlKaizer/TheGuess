@@ -94,6 +94,8 @@ function configLetters() {
         || isArrowRight(char) || isDelete(char) || char.toLowerCase() == "tab";
     }
 
+    loadUserLogged();
+
     for (let i = 0; i < 6; i++) {
         getWord(i).forEach((element, j) => {
             // Evento disparado quando uma tecla do teclado é solta
@@ -373,6 +375,22 @@ const loadWord = () => {
         setWordFromDados(wordObj);
     }); 
 } 
+const loadUserLogged = () => {
+    if (sessionStorage.getItem("user")) {
+        let user = JSON.parse(sessionStorage.getItem("user"));
+        appendDivUser();
+        updateDivUser(user.username);
+        return true;
+    } else if (localStorage.getItem("remember")) {
+        const userIndex = JSON.parse(localStorage.getItem("remember"));
+        if (userIndex == -1) return;
+        const user = getUserLocalStorage(userIndex);
+        appendDivUser();
+        updateDivUser(user.username);
+        return true;
+    }
+    return false;
+}
 
 const getStorageData = () => {
     let data = [
@@ -497,7 +515,8 @@ const configCadastro = () => {
         addUserToLocalStorage(user);
 
         activateUser(user);
-    })
+    });
+    loadUserLogged();
 }
 
 const configLogin = () => {
@@ -531,7 +550,8 @@ const configLogin = () => {
         }
 
         activateUser(user);
-    })
+    });
+    loadUserLogged();
 }
 
 const activateUser = (user) => {
@@ -556,6 +576,54 @@ const saveUserLocalStorage = (user) => {
     localStorage.setItem("users", JSON.stringify(users));
 }
 
+const appendDivUser = () => {
+    const div = document.createElement("div");
+    div.classList = "user";
+    const headers = document.getElementsByClassName("container__header");
+    headers[0].appendChild(div);        
+}
+
+const updateDivUser = (username) => {
+    const divs = document.getElementsByClassName("user");
+    divs[0].innerHTML = username;        
+}
+
+const loadLanding = () => {
+    if (loadUserLogged()) appendLogoutDiv();
+    [openModalButton, closeModalButton, fade].forEach((element) => {
+        element.addEventListener("click", () => toggleModal());
+    });
+}
+
+const appendLogoutDiv = () => {
+    const div = document.createElement("div");
+    div.classList = "logout";
+
+    const button = document.createElement("button");
+    button.classList = "header__button";
+    button.addEventListener("click", () => {
+        logout();
+    });
+
+    const img = document.createElement("img");
+    img.classList = "header__logout";
+    img.src = "./imagens/logout.png";
+
+    button.appendChild(img);
+    div.appendChild(button);
+
+    const headers = document.getElementsByClassName("container__header");
+    headers[0].appendChild(div);
+}
+
+const logout = () => {
+    sessionStorage.clear();
+    if (localStorage.getItem("remember")) {
+        localStorage.setItem("remember", JSON.stringify(-1));
+    }
+    window.location.reload();
+}
+
 const openModalButton = document.querySelector("#open-modal");
 const closeModalButton = document.querySelector("#close-modal");
 const modal = document.querySelector("#modal");
@@ -566,7 +634,3 @@ const toggleModal = () => {
         element.classList.toggle("off");
     });
 }
-
-[openModalButton, closeModalButton, fade].forEach((element) => {
-    element.addEventListener("click", () => toggleModal());
-});
