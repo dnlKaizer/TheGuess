@@ -350,13 +350,41 @@ const compareDates = (date1, date2) => {
 }
 
 const configCadastro = () => {
+
+    /**
+     * 
+     * @param {String} username 
+     * @param {String} email 
+     * @returns {boolean}
+     */
+    const verifyIfExists = (username, email) => {
+        if (localStorage.getItem("users")) {
+            let users = [JSON.parse(localStorage.getItem("users"))];
+            users.forEach(user => {
+                if (user.username == username || user.email == email) return true;
+            });
+        }
+        return false;
+    }
+
     const form = document.querySelector("#cadastro-form");
-    form.addEventListener("submit", () => {
+    form.addEventListener("submit", (event) => {
         const username = document.querySelector("#cadastro-username").value;
         const email = document.querySelector("#cadastro-email").value;
         const password = document.querySelector("#cadastro-password").value;
         const c_password = document.querySelector("#cadastro-confirm__password").value;
         const remember = document.querySelector("#cadastro-lembrar").checked;
+
+        if (verifyIfExists(username, email)) {
+            alert("Nome de usuário e/ou email já existentes.");
+            event.preventDefault();
+            return;
+        }
+        if (password != c_password) {
+            alert("Senhas não conferem.")
+            event.preventDefault();
+            return;
+        }
     })
 }
 
