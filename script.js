@@ -10,7 +10,6 @@ today = {
     year: today.getUTCFullYear()
 }
 let activeUser = null;
-let remember = -1;
 
 function configLetters() {
     /**
@@ -412,17 +411,40 @@ const configCadastro = () => {
         }
 
         let user = createUser(username, email, password);
-        if (lembrar) localStorage.setItem("remember", JSON.stringify(user.index));
+        if (lembrar) rememberUser(user);
         
         addUserToLocalStorage(user);
     })
 }
 
 const configLogin = () => {
+    const findUser = (username, password) => {
+        if (localStorage.getItem("users")) {
+            let users = JSON.parse(localStorage.getItem("users"));
+            for (let i = 0; i < users.length; i++) {
+                if (users[i].username == username && users[i].password == password) return users[i];
+            }
+        } 
+        return null;
+    }
+
     const form = document.querySelector("#login-form");
-    form.addEventListener("submit", () => {
+    form.addEventListener("submit", (event) => {
         const username = document.querySelector("#login-username").value;
         const password = document.querySelector("#login-password").value;
-        const remember = document.querySelector("#login-lembrar").checked;
+        const lembrar = document.querySelector("#login-lembrar").checked;
+
+        let user = findUser(username, password);
+        if (user == null) {
+            alert("Usuário e/ou senha inválidos.")
+            event.preventDefault();
+            return;
+        }
+
+        if (lembrar) rememberUser(user);
     })
 }
+
+const rememberUser = (user) => {
+    localStorage.setItem("remember", JSON.stringify(user.index));
+}  
