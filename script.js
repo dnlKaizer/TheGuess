@@ -9,6 +9,8 @@ today = {
     month: today.getUTCMonth() + 1,
     year: today.getUTCFullYear()
 }
+let activeUser = null;
+let remember = -1;
 
 function configLetters() {
     /**
@@ -359,12 +361,35 @@ const configCadastro = () => {
      */
     const verifyIfExists = (username, email) => {
         if (localStorage.getItem("users")) {
-            let users = [JSON.parse(localStorage.getItem("users"))];
-            users.forEach(user => {
-                if (user.username == username || user.email == email) return true;
-            });
+            let users = JSON.parse(localStorage.getItem("users"));
+            for (let i = 0; i < users.length; i++) {
+                if (users[i].username == username || users[i].email == email) return true;
+            }
         }
         return false;
+    }
+
+    const createUser = (username, email, password) => {
+        return {index: getNUsers(), username: username, email: email, password: password};
+    }
+
+    const getNUsers = () => {
+        if (localStorage.getItem("users")) {
+            return JSON.parse(localStorage.getItem("users")).length;
+        } else {
+            return 0;
+        }
+    }
+
+    const addUserToLocalStorage = (user) => {
+        let users;
+        if (localStorage.getItem("users")) {
+            users = JSON.parse(localStorage.getItem("users"));
+        } else {
+            users = [];
+        }
+        users.push(user);
+        localStorage.setItem("users", JSON.stringify(users));
     }
 
     const form = document.querySelector("#cadastro-form");
@@ -373,7 +398,7 @@ const configCadastro = () => {
         const email = document.querySelector("#cadastro-email").value;
         const password = document.querySelector("#cadastro-password").value;
         const c_password = document.querySelector("#cadastro-confirm__password").value;
-        const remember = document.querySelector("#cadastro-lembrar").checked;
+        const lembrar = document.querySelector("#cadastro-lembrar").checked;
 
         if (verifyIfExists(username, email)) {
             alert("Nome de usuário e/ou email já existentes.");
@@ -385,6 +410,11 @@ const configCadastro = () => {
             event.preventDefault();
             return;
         }
+
+        let user = createUser(username, email, password);
+        if (lembrar) localStorage.setItem("remember", JSON.stringify(user.index));
+        
+        addUserToLocalStorage(user);
     })
 }
 
