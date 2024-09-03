@@ -94,6 +94,8 @@ function configLetters() {
         || isArrowRight(char) || isDelete(char) || char.toLowerCase() == "tab";
     }
 
+    loadUserLogged();
+
     for (let i = 0; i < 6; i++) {
         getWord(i).forEach((element, j) => {
             // Evento disparado quando uma tecla do teclado é solta
@@ -373,6 +375,19 @@ const loadWord = () => {
         setWordFromDados(wordObj);
     }); 
 } 
+const loadUserLogged = () => {
+    if (sessionStorage.getItem("user")) {
+        let user = JSON.parse(sessionStorage.getItem("user"));
+        appendDivUser();
+        updateDivUser(user.username);
+    } else if (localStorage.getItem("remember")) {
+        const userIndex = JSON.parse(localStorage.getItem("remember"));
+        if (userIndex == -1) return;
+        const user = getUserLocalStorage(userIndex);
+        appendDivUser();
+        updateDivUser(user.username);
+    }
+}
 
 const getStorageData = () => {
     let data = [
@@ -497,7 +512,8 @@ const configCadastro = () => {
         addUserToLocalStorage(user);
 
         activateUser(user);
-    })
+    });
+    loadUserLogged();
 }
 
 const configLogin = () => {
@@ -531,7 +547,8 @@ const configLogin = () => {
         }
 
         activateUser(user);
-    })
+    });
+    loadUserLogged();
 }
 
 const activateUser = (user) => {
@@ -554,4 +571,16 @@ const saveUserLocalStorage = (user) => {
     let users = [...JSON.parse(localStorage.getItem("users"))];
     users[user.index] = user;
     localStorage.setItem("users", JSON.stringify(users));
+}
+
+const appendDivUser = () => {
+    const div = document.createElement("div");
+    div.classList = "user";
+    const headers = document.getElementsByClassName("container__header");
+    headers[0].appendChild(div);        
+}
+
+const updateDivUser = (username) => {
+    const divs = document.getElementsByClassName("user");
+    divs[0].innerHTML = username;        
 }

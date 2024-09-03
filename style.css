@@ -27,6 +27,12 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
     position: absolute;
 }
 
+.user {
+    left: 0;
+    margin-left: 15px;
+    position: absolute;
+}
+
 .header__button {
     display: flex;
     justify-content: center;
