@@ -1,7 +1,6 @@
 let accentIsLastKey = false;
 let currentWord = 0;
 let dayWord = "letra";
-let userWon = false;
 let dados = [];
 let today = new Date();
 today = {
@@ -9,7 +8,7 @@ today = {
     month: today.getUTCMonth() + 1,
     year: today.getUTCFullYear()
 }
-let activeUser = null;
+let activeUser;
 
 function configLetters() {
     /**
@@ -129,6 +128,7 @@ function configLetters() {
     getLetter(0,0).focus();
 
     loadData();
+    loadUser();
 }
 
 const jogar = () => {
@@ -147,10 +147,21 @@ const exec = () => {
     setWordColors(word);
 
     // Verifica se o usuário ganhou
-    if (verifyWord(word)) return;
+    if (verifyWord(word)) {
+        if (activeUser != null) {
+            
+        }
+        return;
+    };
 
-    // Incrementa currentWord e habilita próxima word
-    enableNextWord();
+    if (currentWord < 5) {
+        // Incrementa currentWord e habilita próxima word
+        enableNextWord();
+    } else {
+        if (activeUser != null) {
+            
+        }
+    }
 }
 
 /**
@@ -256,23 +267,37 @@ const setWordColors = (word) => {
 }
 
 const enableNextWord = () => {
-    if (currentWord < 5) {
-        currentWord++;
-        const nextWord = getWord(currentWord);
-        setWordStatusOn(nextWord);
-        nextWord[0].focus()
-    }
+    currentWord++;
+    const nextWord = getWord(currentWord);
+    setWordStatusOn(nextWord);
+    nextWord[0].focus()
 }
 
 const saveLetterOnDados = () => {
     let word = getWord(currentWord);
     dados[currentWord].string = passWordToString(word);
-    sessionStorage.setItem("dados", JSON.stringify(dados));
+    if (activeUser == null) {
+        sessionStorage.setItem("dados", JSON.stringify(dados));
+    } else {
+        activeUser.dados[currentWord].string = passWordToString(word);
+        updateUser(activeUser);
+    }
 }
 
 const saveWordOnDados = () => {
     dados[currentWord].played = true;
-    sessionStorage.setItem("dados", JSON.stringify(dados));
+    if (activeUser == null) {
+        sessionStorage.setItem("dados", JSON.stringify(dados));
+    } else {
+        activeUser.dados[currentWord].played = true;
+        updateUser(activeUser);
+    }
+}
+
+const updateUser = (user) => {
+    let users =[...JSON.parse(localStorage.getItem("users"))];
+    users[user.index] = user;
+    localStorage.setItem("users", JSON.stringify(users));
 }
 
 /**
@@ -309,37 +334,67 @@ const loadData = () => {
                 setWordFromDados(wordObj);
             }); 
         } else {
-            getStorageData();
-        }
-    } else if (localStorage.getItem("dados")) {
-        dados = [...JSON.parse(localStorage.getItem("dados"))];
-        if (compareDates(dados[0].date, today)) {
-            dados.forEach((wordObj) => {
-                setWordFromDados(wordObj);
-            }); 
-        } else {
-            getStorageData();
+            dados = getStorageData();
+            saveDataOnSessionStorage(dados);
         }
     } else {
-        getStorageData();
+        dados = getStorageData();
+        saveDataOnSessionStorage(dados);
+    }
+}
+const loadUser = () => {
+    if (localStorage.getItem("activeUserIndex")) {
+        let users = JSON.parse(localStorage.getItem("users"));
+        activeUser = JSON.parse(localStorage.getItem("activeUserIndex"));
+        activeUser = users[activeUser];
+    } else {
+        activeUser = null;
     }
 }
 
-const getStorageData = async () => {
-    try {  
-        const response = await fetch('./data.json');
-        const data = await response.json();
-
-        dados = [...data];
-        setDadosDate(dados);
-
-        // ADICIONAR AQUI CASO EM QUE USUÁRIO ESTÁ LOGADO
-        sessionStorage.setItem("dados", JSON.stringify(dados));
-
-    } catch (err) {    
-        alert(`Atenção: Erro ${err}`);
-        console.error(err);
-    }
+const getStorageData = () => {
+    let data = [
+        {
+            index: 0,
+            string: "",
+            played: false,
+            date: today
+        },
+        {
+            index: 1,
+            string: "",
+            played: false,
+            date: today
+        },
+        {
+            index: 2,
+            string: "",
+            played: false,
+            date: today
+        },
+        {
+            index: 3,
+            string: "",
+            played: false,
+            date: today
+        },
+        {
+            index: 4,
+            string: "",
+            played: false,
+            date: today
+        },
+        {
+            index: 5,
+            string: "",
+            played: false,
+            date: today
+        }
+    ]
+    return data;
+}
+const saveDataOnSessionStorage = (data) => {
+    sessionStorage.setItem("dados", JSON.stringify(dados));
 }
 
 /**
@@ -369,7 +424,16 @@ const configCadastro = () => {
     }
 
     const createUser = (username, email, password) => {
-        return {index: getNUsers(), username: username, email: email, password: password};
+        const user = {
+            index: getNUsers(),
+            username: username,
+            email: email,
+            password: password,
+            victories: 0,
+            matches: 0,
+            dados: getStorageData()
+        }
+        return user;
     }
 
     const getNUsers = () => {
@@ -414,6 +478,8 @@ const configCadastro = () => {
         if (lembrar) rememberUser(user);
         
         addUserToLocalStorage(user);
+
+        activateUser(user);
     })
 }
 
@@ -442,7 +508,14 @@ const configLogin = () => {
         }
 
         if (lembrar) rememberUser(user);
+
+        activateUser(user);
     })
+}
+
+const activateUser = (user) => {
+    activeUser = user;
+    localStorage.setItem("activeUserIndex", JSON.stringify(user.index));
 }
 
 const rememberUser = (user) => {
