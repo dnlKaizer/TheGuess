@@ -348,3 +348,18 @@ const getStorageData = async () => {
 const compareDates = (date1, date2) => {
     return (date1.day == date2.day && date1.month == date2.month && date1.year == date2.year);
 }
+
+const openModalButton = document.querySelector("#open-modal");
+const closeModalButton = document.querySelector("#close-modal");
+const modal = document.querySelector("#modal");
+const fade = document.querySelector("#fade");
+
+const toggleModal = () => {
+    [modal, fade].forEach((element) => {
+        element.classList.toggle("off");
+    });
+}
+
+[openModalButton, closeModalButton, fade].forEach((element) => {
+    element.addEventListener("click", () => toggleModal());
+});

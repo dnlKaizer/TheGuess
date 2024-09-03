@@ -86,6 +86,7 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
 .container__landing{
     gap: 20px;
 }
+
 .container__home {
     gap: 40px;
 }
@@ -246,6 +247,7 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
     justify-content: center;
     gap: 10px;
     text-align: center;
+    z-index: 2;
 }
 
 .logo__img{
@@ -277,6 +279,7 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
     flex-direction: column;
     gap: 10px;
     padding: 10px 0;
+    z-index: 2;
 }
 
 #fade {
@@ -318,4 +321,17 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
 #modal.off,
 #fade.off {
     display: none;
+}
+
+#close-modal {
+    width: fit-content;
+    height: fit-content;
+    padding: 8px;
+    border-radius: 2px;
+    font-size: 0;
+}
+
+#close-modal img {
+    width: 20px;
+    height: 20px;
 }
