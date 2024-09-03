@@ -590,6 +590,9 @@ const updateDivUser = (username) => {
 
 const loadLanding = () => {
     if (loadUserLogged()) appendLogoutDiv();
+    [openModalButton, closeModalButton, fade].forEach((element) => {
+        element.addEventListener("click", () => toggleModal());
+    });
 }
 
 const appendLogoutDiv = () => {
@@ -631,8 +634,3 @@ const toggleModal = () => {
         element.classList.toggle("off");
     });
 }
-
-[openModalButton, closeModalButton, fade].forEach((element) => {
-    element.addEventListener("click", () => toggleModal());
-});
-
