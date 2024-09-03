@@ -352,13 +352,19 @@ const compareDates = (date1, date2) => {
 const configCadastro = () => {
     const form = document.querySelector("#cadastro-form");
     form.addEventListener("submit", () => {
-        
+        const username = document.querySelector("#cadastro-username").value;
+        const email = document.querySelector("#cadastro-email").value;
+        const password = document.querySelector("#cadastro-password").value;
+        const c_password = document.querySelector("#cadastro-confirm__password").value;
+        const remember = document.querySelector("#cadastro-lembrar").checked;
     })
 }
 
 const configLogin = () => {
     const form = document.querySelector("#login-form");
     form.addEventListener("submit", () => {
-        
+        const username = document.querySelector("#login-username").value;
+        const password = document.querySelector("#login-password").value;
+        const remember = document.querySelector("#login-lembrar").checked;
     })
 }
