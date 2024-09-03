@@ -348,3 +348,17 @@ const getStorageData = async () => {
 const compareDates = (date1, date2) => {
     return (date1.day == date2.day && date1.month == date2.month && date1.year == date2.year);
 }
+
+const configCadastro = () => {
+    const form = document.querySelector("#cadastro-form");
+    form.addEventListener("submit", () => {
+        
+    })
+}
+
+const configLogin = () => {
+    const form = document.querySelector("#login-form");
+    form.addEventListener("submit", () => {
+        
+    })
+}
