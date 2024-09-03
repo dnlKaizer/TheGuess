@@ -148,7 +148,10 @@ const exec = () => {
     // Verifica se o usuário ganhou
     if (verifyWord(word)) {
         if (activeUser != null) {
-            
+            activeUser.matches += 1;
+            activeUser.victories += 1;
+            saveUserSessionStorage(activeUser);
+            saveUserLocalStorage(activeUser);
         }
         return;
     };
@@ -158,7 +161,9 @@ const exec = () => {
         enableNextWord();
     } else {
         if (activeUser != null) {
-            
+            activeUser.matches += 1;
+            saveUserSessionStorage(activeUser);
+            saveUserLocalStorage(activeUser);
         }
     }
 }
