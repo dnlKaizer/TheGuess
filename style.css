@@ -296,7 +296,9 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
     z-index: 5;
 }
 
-#modal{
+#modal-index,
+#modal-win,
+#modal-lose {
     position: fixed;
     left: 50%;
     top: 50%;
@@ -336,7 +338,9 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
     border-bottom: 1px solid black;
 }
 
-#modal.off,
+#modal-index.off,
+#modal-win.off,
+#modal-lose.off,
 #fade.off {
     display: none;
 }
@@ -390,4 +394,4 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
 
 .spacer-half {
     flex-grow: 0.5;
-  }
+}
