@@ -215,7 +215,7 @@ const exec = () => {
         fade.addEventListener("click", () => toggleModalLose());
 
         const palavraCorreta = document.querySelector("#palavra-correta");
-        palavraCorreta.innerHTML = dayWord;
+        palavraCorreta.innerHTML = dayWord.toUpperCase();
     }
 }
 
