@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-  <img src="./imagens/logo-fundo.png" alt="TheGuess Logo"/>
+  <img src="./imagens/logo-fundo.png" alt="TheGuess Logo" height="300px"/>
 </p>
 
 ## 🚀 Em Desenvolvimento 🚀
@@ -31,12 +31,12 @@ A palavra muda diariamente, proporcionando um novo desafio a cada dia!
 ## Demonstração
 
 <p align="center">
-  <img src="./imagens/demo-sem-cor.jpg" alt="Demo1" height="200px"/>
-  <img src="./imagens/demo-1.jpg" alt="Demo1" height="200px"/>
-  <img src="./imagens/demo-2.jpg" alt="Demo2" height="200px"/>
-  <img src="./imagens/demo-4.jpg" alt="Demo4" height="200px"/>
-  <img src="./imagens/demo-winner-msg.jpg" alt="Demo Full Screen" height="200px"/>
-  <img src="./imagens/demo-fullscreen.jpg" alt="Demo Full Screen" height="200px"/>
+  <img src="./imagens/demo-sem-cor.jpg" alt="Demo1" height="180px"/>
+  <img src="./imagens/demo-1.jpg" alt="Demo1" height="180px"/>
+  <img src="./imagens/demo-2.jpg" alt="Demo2" height="180px"/>
+  <img src="./imagens/demo-4.jpg" alt="Demo4" height="180px"/>
+  <img src="./imagens/demo-winner-msg.jpg" alt="Demo Full Screen" height="180px"/>
+  <img src="./imagens/demo-fullscreen.jpg" alt="Demo Full Screen" height="180px"/>
 </p>
 
 Mantenha-se atualizado, pois estamos em constante desenvolvimento e novas funcionalidades estão a caminho!
