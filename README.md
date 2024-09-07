@@ -1,5 +1,5 @@
 <h1 align="center"> 
-  <img src="./imagens/titulo.png" alt="TheGuess Titulo"/>
+  <img src="./imagens/titulo.jpg" alt="TheGuess Titulo"/>
 </h1>
 
 <p align="center">
