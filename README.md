@@ -1,7 +1,7 @@
 <h1 align="center"> TheGuess </h1>
 
 <p align="center">
-  <img src="./imagens/logo-fundo.png" alt="TheGuess Logo" />
+  <img src="./imagens/logo.png" alt="TheGuess Logo" />
 </p>
 
 ## Descrição do Projeto
