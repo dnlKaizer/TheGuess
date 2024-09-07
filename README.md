@@ -1,4 +1,6 @@
-<h1 align="center"> TheGuess </h1>
+<h1 align="center"> 
+  <img src="./imagens/titulo.png" alt="TheGuess Titulo"/>
+</h1>
 
 <p align="center">
   <img src="./imagens/logo-fundo.png" alt="TheGuess Logo"/>
