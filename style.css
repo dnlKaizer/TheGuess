@@ -83,7 +83,7 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
     position: relative;
 }
 
-.container__landing, .container__home {
+.container__landing, .container__home, .container__login {
     height: calc(100vh - 52px);
     margin: auto;
 }
@@ -97,6 +97,7 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
     flex-direction: column;
     padding: 50px;
 }
+
 @media screen and (max-width: 768px) {
     .container__home, .container__login{
         justify-content: start;
@@ -112,6 +113,7 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
 }
 
 .container__link {
+    margin-top: 30px;
     margin-bottom: 20px;
 }
 
@@ -296,7 +298,9 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
     z-index: 5;
 }
 
-#modal{
+#modal-index,
+#modal-win,
+#modal-lose {
     position: fixed;
     left: 50%;
     top: 50%;
@@ -309,6 +313,20 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
     border-radius: .5rem;
 }
 
+#modal-win,
+#modal-lose {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: fit-content;
+    padding: 40px;
+    gap: 10px;
+}
+
+#modal-lose #palavra-correta {
+    color: #0000b8;
+}
+
 .modal-header {
     display: flex;
     justify-content: space-between;
@@ -318,11 +336,28 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
     padding-bottom: 1rem;
 }
 
-.modal-body p {
-    margin-bottom: 1rem;
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
 }
 
-#modal.off,
+.modal-body p {
+    opacity: 90%;
+}
+
+#objetivo {
+    align-self: center;
+    font-size: 1.1rem;
+    width: fit-content;
+    border-bottom: 1px solid black;
+    text-align: center;
+}
+
+#modal-index.off,
+#modal-win.off,
+#modal-lose.off,
 #fade.off {
     display: none;
 }
@@ -376,4 +411,4 @@ html, body, figure, img, div, section, article, input, form, label, header, foot
 
 .spacer-half {
     flex-grow: 0.5;
-  }
+}

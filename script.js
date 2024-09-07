@@ -10,6 +10,7 @@ today = {
 }
 let activeUser;
 
+
 function configLetters() {
     const getDayLetter = async () => {
         
@@ -178,6 +179,17 @@ const exec = () => {
             saveUserSessionStorage(activeUser);
             saveUserLocalStorage(activeUser);
         }
+        const modalWin = document.querySelector("#modal-win");
+        const fade = document.querySelector("#fade");
+        [modalWin, fade].forEach((element) => {
+            element.classList.toggle("off");
+        });
+        const toggleModalWin = () => {
+            [modalWin, fade].forEach((element) => {
+                element.classList.toggle("off");
+            });
+        };
+        fade.addEventListener("click", () => toggleModalWin());
         return;
     };
 
@@ -190,6 +202,20 @@ const exec = () => {
             saveUserSessionStorage(activeUser);
             saveUserLocalStorage(activeUser);
         }
+        const modalLose = document.querySelector("#modal-lose");
+        const fade = document.querySelector("#fade");
+        [modalLose, fade].forEach((element) => {
+            element.classList.toggle("off");
+        });
+        const toggleModalLose = () => {
+            [modalLose, fade].forEach((element) => {
+                element.classList.toggle("off");
+            });
+        };
+        fade.addEventListener("click", () => toggleModalLose());
+
+        const palavraCorreta = document.querySelector("#palavra-correta");
+        palavraCorreta.innerHTML = dayWord.toUpperCase();
     }
 }
 
@@ -614,7 +640,7 @@ const updateDivUser = (username) => {
 const loadLanding = () => {
     if (loadUserLogged()) appendLogoutDiv();
     [openModalButton, closeModalButton, fade].forEach((element) => {
-        element.addEventListener("click", () => toggleModal());
+        element.addEventListener("click", () => toggleModalIndex());
     });
 }
 
@@ -649,11 +675,11 @@ const logout = () => {
 
 const openModalButton = document.querySelector("#open-modal");
 const closeModalButton = document.querySelector("#close-modal");
-const modal = document.querySelector("#modal");
+const modalIndex = document.querySelector("#modal-index");
 const fade = document.querySelector("#fade");
 
-const toggleModal = () => {
-    [modal, fade].forEach((element) => {
+const toggleModalIndex = () => {
+    [modalIndex, fade].forEach((element) => {
         element.classList.toggle("off");
     });
-}
+};
