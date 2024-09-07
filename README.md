@@ -29,10 +29,12 @@ A palavra muda diariamente, proporcionando um novo desafio a cada dia!
 ## Demonstração
 
 <p align="center">
-  <img src="./imagens/demo-1.jpg" alt="Demo1" height="200px"/>
-  <img src="./imagens/demo-2.jpg" alt="Demo2" height="200px"/>
-  <img src="./imagens/demo-4.jpg" alt="Demo4" height="200px"/>
-  <img src="./imagens/demo-fullscreen.jpg" alt="Demo Full Screen" height="200px"/>
+  <img src="./imagens/demo-sem-cor.jpg" alt="Demo1" height="250px"/>
+  <img src="./imagens/demo-1.jpg" alt="Demo1" height="250px"/>
+  <img src="./imagens/demo-2.jpg" alt="Demo2" height="250px"/>
+  <img src="./imagens/demo-4.jpg" alt="Demo4" height="250px"/>
+  <img src="./imagens/demo-fullscreen.jpg" alt="Demo Full Screen" height="250px"/>
+  <img src="./imagens/demo-winner-msg.jpg" alt="Demo Full Screen" height="250px"/>
 </p>
 
 Mantenha-se atualizado, pois estamos em constante desenvolvimento e novas funcionalidades estão a caminho!
