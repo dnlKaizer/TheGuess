@@ -1,6 +1,7 @@
 <h1 align="center"> TheGuess </h1>
 
-![TheGuess Logo](./imagens/logo-fundo.png)
+<div id="container"><div>![TheGuess Logo](./imagens/logo-fundo.png)</div></div>
+<style>#container {display: flex; align-items: center; justify-content: center;}</style>
 
 ## Descrição do Projeto
 
